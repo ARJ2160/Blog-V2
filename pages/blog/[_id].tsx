@@ -2,7 +2,7 @@ import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import Navbar from '../components/Navbar';
 
-export async function fetchBlogs(context: any) {
+export async function getServerSideProps(context: any) {
   const _id = context.params?._id;
   const res = await fetch(
     `https://react-blog-backend-sigma.vercel.app/postsdata/${_id}`

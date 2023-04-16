@@ -41,7 +41,6 @@ const Home: NextPage = ({ blogs }: any) => {
           {blogs.map((blog: any, index: number) => {
             return (
               <div key={index}>
-                {' '}
                 <Blog blog={blog} />
               </div>
             );
