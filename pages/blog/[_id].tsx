@@ -27,9 +27,12 @@ const BlogDetails = ({ blogDetails }: any) => {
   useEffect(() => {
     setAuthor(blogDetails?.author);
     setTitle(blogDetails?.title);
-    setPostBody(blogDetails?.postBody);
     setImageSrc(blogDetails?.imagesrc);
     setId(blogDetails?._id);
+    setPostBody(() => {
+      const stringing = blogDetails?.postBody.replace(/<\/?[^>]+(>|$)/g, ' ');
+      return stringing;
+    });
   }, []);
 
   return (

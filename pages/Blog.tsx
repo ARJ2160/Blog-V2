@@ -14,16 +14,14 @@ const Blog = ({ blog }: any) => {
   useEffect(() => {
     setAuthor(blog?.author);
     setTitle(blog?.title);
-    setPostBody(blog?.postBody);
     setImageSrc(blog?.imagesrc);
     setId(blog?._id);
+    setPostBody(() => {
+      const wordarray = blog?.postBody?.split(' ').slice(0, 18).join(' ');
+      const stringing = wordarray?.replace(/<\/?[^>]+(>|$)/g, ' ');
+      return stringing;
+    });
   }, []);
-
-  const handleExcerpt = (blogBody: any) => {
-    const wordarray = blogBody?.split(' ').slice(0, 18).join(' ');
-    const stringing = wordarray?.replace(/<\/?[^>]+(>|$)/g, ' ');
-    return stringing;
-  };
 
   return (
     <div
@@ -44,7 +42,7 @@ const Blog = ({ blog }: any) => {
       </Link>
       <div className='blog-preview-bg'>
         <h1 className='text-2xl'>{title}</h1>
-        <p className='py-2 text-lg'>{handleExcerpt(postBody) + ' ...'}</p>
+        <p className='py-2 text-lg'>{postBody + ' ...'}</p>
         <p className='blog-author'>{author}</p>
         <p className='blog-date'>{blogDate}</p>
       </div>
