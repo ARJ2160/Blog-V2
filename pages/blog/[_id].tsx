@@ -5,8 +5,7 @@ import Navbar from '../components/Navbar';
 export async function fetchBlogs(context: any) {
   const _id = context.params?._id;
   const res = await fetch(
-    `https://react-blog-backend-sigma.vercel.app/postsdata/${_id}`,
-    { cache: 'force-cache', next: { revalidate: 20 } }
+    `https://react-blog-backend-sigma.vercel.app/postsdata/${_id}`
   ).then(res => res.json());
   return {
     props: {
