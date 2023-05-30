@@ -1,13 +1,14 @@
 import React from 'react';
+import Logo from '../../public/logo.webp';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const NavBar = ({ toggle }: any) => {
   return (
-    <nav className='bg-black h-16 w-screen text-white flex justify-between items-center fixed top-0'>
-      <div className='nav--logo flex items-center'>
+    <nav className='bg-black h-20 w-screen text-white flex justify-between items-center fixed top-0'>
+      <div className='nav--logo flex justify-center items-center ml-10'>
         <a href='/' className='nav--logo-primary'>
-          {/* <Image src={Logo} alt='logo' /> */}
-          HOME
+          <Image src={Logo} alt='logo' width={120} height={120} />
         </a>
       </div>
       <div className='px-4 cursor-pointer md:hidden' onClick={toggle}>
