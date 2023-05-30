@@ -3,7 +3,7 @@ import moment from 'moment';
 import Image from 'next/image';
 import Link from 'next/link';
 
-const Blog = ({ blog }: any) => {
+const Blog = ({ blog }: any): JSX.Element => {
   const [author, setAuthor] = useState(blog?.author);
   const [title, setTitle] = useState(blog?.title);
   const [postBody, setPostBody] = useState(blog?.postBody);
@@ -17,21 +17,23 @@ const Blog = ({ blog }: any) => {
     setImageSrc(blog?.imagesrc);
     setId(blog?._id);
     setPostBody(() => {
-      const wordarray = blog?.postBody?.split(' ').slice(0, 18).join(' ');
-      const stringing = wordarray?.replace(/<\/?[^>]+(>|$)/g, ' ');
-      return stringing;
+      return blog?.postBody
+        ?.split(' ')
+        .slice(0, 18)
+        .join(' ')
+        ?.replace(/<\/?[^>]+(>|$)/g, ' ');
     });
   }, []);
 
   return (
     <div
-      className='max-w-md min-h-full bg-white text-black shadow-lg rounded-lg overflow-hidden my-4 col-span-1 p-4'
+      className='col-span-1 max-w-md min-h-full bg-white text-black shadow-lg rounded-lg overflow-hidden'
       key={_id}
     >
       <Link href={`/blog/${_id}`} target='_blank' rel='noopener noreferrer'>
         <div className='blog-thumbnail'>
           <Image
-            className='w-full aspect-auto object-cover object-center'
+            className='w-full max-h-64 aspect-auto object-cover object-center'
             src={imageSrc}
             width={imageSrc?.width || 100}
             height={imageSrc?.height || 100}
@@ -40,7 +42,7 @@ const Blog = ({ blog }: any) => {
           />
         </div>
       </Link>
-      <div className='blog-preview-bg'>
+      <div className='blog-preview-bg p-5'>
         <h1 className='text-2xl'>{title}</h1>
         <p className='py-2 text-lg'>{postBody + ' ...'}</p>
         <p className='blog-author'>{author}</p>

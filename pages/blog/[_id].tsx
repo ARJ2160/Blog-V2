@@ -1,6 +1,7 @@
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import Navbar from '../components/Navbar';
+import Head from 'next/head';
 
 export async function getServerSideProps(context: any) {
   const _id = context.params?._id;
@@ -37,22 +38,22 @@ const BlogDetails = ({ blogDetails }: any) => {
 
   return (
     <>
+      <Head>
+        <title>{title}</title>
+      </Head>
       <Navbar />
       <div className='flex flex-col items-center py-12' key={_id}>
         <a
           className='font-bold text-gray-800 uppercase hover:text-gray-700 text-5xl'
           href='#'
         >
-          Minimal Blog
+          {title}
         </a>
-        <p className='text-lg text-gray-600'>Lorem Ipsum Dolor Sit Amet</p>
       </div>
       <div className='container mx-auto flex flex-wrap py-6'>
         <section className='w-full md:w-2/3 flex flex-col items-center px-3'>
           <article className='flex flex-col shadow my-4'>
-            <a href='#' className='hover:opacity-75'>
-              <img src={imageSrc} />
-            </a>
+            <img src={imageSrc} />
             <div className='bg-white flex flex-col justify-start p-6'>
               <a
                 href='#'
@@ -60,12 +61,7 @@ const BlogDetails = ({ blogDetails }: any) => {
               >
                 Technology
               </a>
-              <a
-                href='#'
-                className='text-3xl font-bold hover:text-gray-700 pb-4'
-              >
-                Lorem Ipsum Dolor Sit Amet Dolor Sit Amet
-              </a>
+              <p className='text-5xl text-bold'>{title}</p>
               <p className='text-sm pb-8'>
                 By {author}, Published on {blogDate}
               </p>

@@ -6,7 +6,7 @@ import React from 'react';
  * This is the Home Page
  * @return {JSX.Element}: The JSX Code for Home Page
  */
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps }: AppProps): JSX.Element {
   return <Component {...pageProps} />;
 }
 
