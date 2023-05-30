@@ -1,9 +1,9 @@
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
-import Navbar from '../components/Navbar';
 import Head from 'next/head';
+import NavBar from '../components/Navbar';
 
-export async function getServerSideProps(context: any) {
+export const getServerSideProps = async (context: any) => {
   const _id = context.params?._id;
   const res = await fetch(
     `https://react-blog-backend-sigma.vercel.app/postsdata/${_id}`
@@ -13,7 +13,7 @@ export async function getServerSideProps(context: any) {
       blogDetails: res
     }
   };
-}
+};
 
 const BlogDetails = ({ blogDetails }: any) => {
   const [author, setAuthor] = useState<string>(blogDetails?.author);
@@ -30,28 +30,20 @@ const BlogDetails = ({ blogDetails }: any) => {
     setTitle(blogDetails?.title);
     setImageSrc(blogDetails?.imagesrc);
     setId(blogDetails?._id);
-    setPostBody(() => {
-      const stringing = blogDetails?.postBody.replace(/<\/?[^>]+(>|$)/g, ' ');
-      return stringing;
-    });
+    setPostBody(() => blogDetails?.postBody.replace(/<\/?[^>]+(>|$)/g, ' '));
   }, []);
 
   return (
-    <>
+    <div key={_id}>
       <Head>
         <title>{title}</title>
       </Head>
-      <Navbar />
-      <div className='flex flex-col items-center py-12' key={_id}>
-        <a
-          className='font-bold text-gray-800 uppercase hover:text-gray-700 text-5xl'
-          href='#'
-        >
-          {title}
-        </a>
-      </div>
-      <div className='container mx-auto flex flex-wrap py-6'>
-        <section className='w-full md:w-2/3 flex flex-col items-center px-3'>
+      {/* <div className='flex flex-col items-center py-12 text-5xl font-bold'>
+        {title}
+      </div> */}
+      <NavBar />
+      <div className='container mx-auto flex flex-wrap py-6 mt-24'>
+        <section className='w-full md:w-2/3 flex flex-col items-center'>
           <article className='flex flex-col shadow my-4'>
             <img src={imageSrc} />
             <div className='bg-white flex flex-col justify-start p-6'>
@@ -62,12 +54,9 @@ const BlogDetails = ({ blogDetails }: any) => {
                 Technology
               </a>
               <p className='text-5xl text-bold'>{title}</p>
-              <p className='text-sm pb-8'>
+              <p className='text-sm py-4'>
                 By {author}, Published on {blogDate}
               </p>
-              <h1 className='text-2xl font-bold pb-3'>Introduction</h1>
-              <p className='pb-3'>{title}</p>
-              <h1 className='text-2xl font-bold pb-3'>Heading</h1>
               <div className='pb-3'>
                 <p>{postBody}</p>
               </div>
@@ -188,7 +177,7 @@ const BlogDetails = ({ blogDetails }: any) => {
           </div>
         </aside>
       </div>
-    </>
+    </div>
   );
 };
 

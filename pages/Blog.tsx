@@ -4,16 +4,16 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 const Blog = ({ blog }: any): JSX.Element => {
-  const [author, setAuthor] = useState(blog?.author);
-  const [title, setTitle] = useState(blog?.title);
+  // const [author, setAuthor] = useState(blog?.author);
+  // const [title, setTitle] = useState(blog?.title);
   const [postBody, setPostBody] = useState(blog?.postBody);
   const [imageSrc, setImageSrc] = useState(blog?.imagesrc);
   const [_id, setId] = useState(blog?._id);
-  const blogDate = moment().format('D MMM YYYY');
+  const blogDate = moment().format('MMM Do YYYY');
 
   useEffect(() => {
-    setAuthor(blog?.author);
-    setTitle(blog?.title);
+    // setAuthor(blog?.author);
+    // setTitle(blog?.title);
     setImageSrc(blog?.imagesrc);
     setId(blog?._id);
     setPostBody(() => {
@@ -26,28 +26,28 @@ const Blog = ({ blog }: any): JSX.Element => {
   }, []);
 
   return (
-    <div
-      className='col-span-1 max-w-md min-h-full bg-white text-black shadow-lg rounded-lg overflow-hidden'
-      key={_id}
-    >
+    <div>
       <Link href={`/blog/${_id}`} target='_blank' rel='noopener noreferrer'>
         <div className='blog-thumbnail'>
-          <Image
-            className='w-full max-h-64 aspect-auto object-cover object-center'
-            src={imageSrc}
-            width={imageSrc?.width || 100}
-            height={imageSrc?.height || 100}
-            loading='lazy'
-            alt='No image available'
-          />
+          <div className='flex justify-between'>
+            <div className='pr-6'>
+              <Image
+                className='w-96 h-36'
+                src={imageSrc}
+                width={imageSrc?.width || 100}
+                height={imageSrc?.height || 100}
+                loading='lazy'
+                alt='No image available'
+              />
+            </div>
+            <div className='flex flex-col justify-start text-start'>
+              <div className='text-gray-600'>{blogDate}</div>
+              <div className='text-gray-300 pt-6'>{postBody}</div>
+            </div>
+          </div>
+          <div className='w-[98%] h-[2px] my-6 bg-gray-700'></div>
         </div>
       </Link>
-      <div className='blog-preview-bg p-5'>
-        <h1 className='text-2xl'>{title}</h1>
-        <p className='py-2 text-lg'>{postBody + ' ...'}</p>
-        <p className='blog-author'>{author}</p>
-        <p className='blog-date'>{blogDate}</p>
-      </div>
     </div>
   );
 };
