@@ -26,7 +26,7 @@ const Home: NextPage = ({ blogs }: any): JSX.Element => {
       <Navbar />
       <header className='w-full container mx-auto'>
         <div className='flex flex-col items-center py-12'>
-          <a className='font-bold text-white uppercase text-9xl' href='#'>
+          <a className='font-bold text-white uppercase lg:text-[9rem] md:text-8xl sm:text-6xl text-6xl' href='#'>
             THE BLOG
           </a>
         </div>
