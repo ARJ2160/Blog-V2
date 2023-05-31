@@ -32,7 +32,7 @@ const Blog = ({ blog }: any): JSX.Element => {
           <div className='flex justify-between'>
             <div className='pr-6'>
               <Image
-                className='w-96 h-36'
+                className='w-96 h-36 aspect-auto'
                 src={imageSrc}
                 width={imageSrc?.width || 100}
                 height={imageSrc?.height || 100}

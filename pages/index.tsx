@@ -3,21 +3,21 @@ import type {
   InferGetServerSidePropsType,
   NextPage
 } from 'next';
-import Head from 'next/head';
 import React, { useEffect, useState } from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
 import Blog from './Blog';
-import Navbar from './components/Navbar';
 import Image from 'next/image';
-import DropDown from './components/DropDown';
+import DropDown from '../components/DropDown';
 import Link from 'next/link';
 import moment from 'moment';
 import { Stack } from '@mui/material';
+import DesignTutorials from '../components/DesignTutorials';
+import ContactUs from '../components/ContactUs';
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const res = await fetch(
-    'https://react-blog-backend-sigma.vercel.app/postsdata'
-  ).then(res => res.json());
+  const res = await fetch(process.env.NEXT_PUBLIC_BACKEND_URL as string).then(
+    res => res.json()
+  );
   return {
     props: {
       blogs: res
@@ -51,13 +51,9 @@ const Home: NextPage = ({
 
   return (
     <React.Fragment>
-      <Navbar toggle={toggle} />
+      {/* <Navbar toggle={toggle} /> */}
       <DropDown isOpen={isOpen} toggle={toggle} />
-      <div className='bg-black text-white flex min-h-screen flex-col items-center justify-center'>
-        <Head>
-          <title>THE BLOG</title>
-          <link rel='icon' href='/favicon.ico' />
-        </Head>
+      <div className='bg-[#121212] text-white flex min-h-screen flex-col items-center justify-center'>
         <div className='w-11/12 h-[2px] mb-10 mt-24 bg-gray-700'></div>
         <div className='flex flex-col items-center my-20 w-full'>
           <div className='font-bold text-white uppercase lg:text-[12rem] md:text-8xl sm:text-6xl text-6xl'>
@@ -90,7 +86,9 @@ const Home: NextPage = ({
                     <div className='blog-content'>
                       <p className='pt-4'>{blogDate}</p>
                       <div className='text-5xl py-4'>{b?.title}</div>
-                      <div>{b.postBody?.replace(/<\/?[^>]+(>|$)/g, ' ')}</div>
+                      <div className='w-11/12'>
+                        {b.postBody?.replace(/<\/?[^>]+(>|$)/g, ' ')}
+                      </div>
                     </div>
                   </div>
                 );
@@ -121,6 +119,12 @@ const Home: NextPage = ({
             )}
           </div>
         </div>
+      </div>
+      <div className='bg-white text-[#121212] my-20'>
+        <DesignTutorials />
+      </div>
+      <div className=''>
+        <ContactUs />
       </div>
     </React.Fragment>
   );

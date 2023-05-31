@@ -1,7 +1,5 @@
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
-import Head from 'next/head';
-import NavBar from '../components/Navbar';
 
 export const getServerSideProps = async (context: any) => {
   const _id = context.params?._id;
@@ -23,8 +21,6 @@ const BlogDetails = ({ blogDetails }: any) => {
   const [_id, setId] = useState(blogDetails?._id);
   const blogDate = moment().format('D MMM YYYY');
 
-  console.log(blogDetails);
-
   useEffect(() => {
     setAuthor(blogDetails?.author);
     setTitle(blogDetails?.title);
@@ -35,13 +31,6 @@ const BlogDetails = ({ blogDetails }: any) => {
 
   return (
     <div key={_id}>
-      <Head>
-        <title>{title}</title>
-      </Head>
-      {/* <div className='flex flex-col items-center py-12 text-5xl font-bold'>
-        {title}
-      </div> */}
-      <NavBar />
       <div className='container mx-auto flex flex-wrap py-6 mt-24'>
         <section className='w-full md:w-2/3 flex flex-col items-center'>
           <article className='flex flex-col shadow my-4'>
