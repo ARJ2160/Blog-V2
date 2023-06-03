@@ -1,24 +1,14 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Logo from '../public/logo.webp';
 import Link from 'next/link';
 import Image from 'next/image';
 import { signOut, useSession } from 'next-auth/react';
 import { Button } from './ui/button';
-import { Session } from 'next-auth';
 
-export const getServerSideProps = () => {
-  const { data: session } = useSession();
-  return {
-    props: {
-      session
-    }
-  };
-};
+const NavBar = ({ toggle }: any) => {
+  const { data: session, status }: any = useSession();
 
-const NavBar = ({ toggle, session }: { toggle: any; session?: Session }) => {
-  useEffect(() => {
-    console.log('>> NAV', session);
-  });
+  console.log('>>', session, status);
   return (
     <nav className='bg-black h-20 w-screen text-white flex justify-between items-center fixed top-0'>
       <div className='nav--logo flex justify-center items-center ml-10'>
@@ -47,12 +37,12 @@ const NavBar = ({ toggle, session }: { toggle: any; session?: Session }) => {
         <Link href='/blog/create' className='mx-5 cursor-pointer'>
           Write a Blog
         </Link>
-        {!session && (
+        {status !== 'authenticated' && (
           <Link href='/login' className='mx-5 cursor-pointer'>
             Sign In
           </Link>
         )}
-        {session && (
+        {status === 'authenticated' && (
           <div className='flex items-center'>
             <Button
               variant='secondary'
@@ -61,7 +51,7 @@ const NavBar = ({ toggle, session }: { toggle: any; session?: Session }) => {
             >
               Sign Out
             </Button>
-            {session.user && (
+            {session && session.user && (
               <Image
                 className='rounded-full'
                 src={session.user.image as string}
