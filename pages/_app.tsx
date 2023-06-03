@@ -3,20 +3,26 @@ import type { AppProps } from 'next/app';
 import React from 'react';
 import Layout from '../components/Layout';
 import Head from 'next/head';
+import { SessionProvider } from 'next-auth/react';
 
 /**
  * This is the Home Page
  * @return {JSX.Element}: The JSX Code for Home Page
  */
-function MyApp({ Component, pageProps }: AppProps): JSX.Element {
+function MyApp({
+  Component,
+  pageProps: { session, ...pageProps }
+}: AppProps): JSX.Element {
   return (
-    <Layout>
-      <Head>
-        <title>THE BLOG</title>
-        <link rel='icon' href='/favicon.ico' />
-      </Head>
-      <Component {...pageProps} />
-    </Layout>
+    <SessionProvider session={session}>
+      <Layout>
+        <Head>
+          <title>THE BLOG</title>
+          <link rel='icon' href='/favicon.ico' />
+        </Head>
+        <Component {...pageProps} />
+      </Layout>
+    </SessionProvider>
   );
 }
 

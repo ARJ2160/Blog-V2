@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 export const getServerSideProps = async (context: any) => {
   const _id = context.params?._id;
   const res = await fetch(
-    `https://react-blog-backend-sigma.vercel.app/postsdata/${_id}`
+    (process.env.NEXT_PUBLIC_BACKEND_URL + 'postsdata/' + _id) as string
   ).then(res => res.json());
   return {
     props: {

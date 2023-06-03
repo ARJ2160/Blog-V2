@@ -3,21 +3,19 @@ import type {
   InferGetServerSidePropsType,
   NextPage
 } from 'next';
-import React, { useEffect, useState } from 'react';
-import CircularProgress from '@mui/material/CircularProgress';
+import React from 'react';
 import Blog from './Blog';
 import Image from 'next/image';
-import DropDown from '../components/DropDown';
 import Link from 'next/link';
 import moment from 'moment';
-import { Stack } from '@mui/material';
+import { CircularProgress, Stack } from '@mui/material';
 import DesignTutorials from '../components/DesignTutorials';
 import ContactUs from '../components/ContactUs';
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const res = await fetch(process.env.NEXT_PUBLIC_BACKEND_URL as string).then(
-    res => res.json()
-  );
+  const res = await fetch(
+    (process.env.NEXT_PUBLIC_BACKEND_URL + 'postsdata/') as string
+  ).then(res => res.json());
   return {
     props: {
       blogs: res
@@ -28,31 +26,12 @@ export const getServerSideProps: GetServerSideProps = async () => {
 const Home: NextPage = ({
   blogs
 }: InferGetServerSidePropsType<typeof getServerSideProps>): JSX.Element => {
-  const [isOpen, setIsOpen] = useState(false);
   const blogDate = moment().format('D MMM YYYY');
-
-  const toggle = () => {
-    setIsOpen(!isOpen);
-  };
-
-  useEffect(() => {
-    const hideMenu = () => {
-      if (window.innerWidth > 768 && isOpen) {
-        setIsOpen(false);
-      }
-    };
-    window.addEventListener('resize', hideMenu);
-    return () => {
-      window.removeEventListener('resize', hideMenu);
-    };
-  });
 
   console.log(blogs);
 
   return (
     <React.Fragment>
-      {/* <Navbar toggle={toggle} /> */}
-      <DropDown isOpen={isOpen} toggle={toggle} />
       <div className='bg-[#121212] text-white flex min-h-screen flex-col items-center justify-center'>
         <div className='w-11/12 h-[2px] mb-10 mt-24 bg-gray-700'></div>
         <div className='flex flex-col items-center my-20 w-full'>

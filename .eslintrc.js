@@ -14,13 +14,15 @@ module.exports = {
   },
   plugins: ['react', '@typescript-eslint'],
   rules: {
-    'require-jsdoc': 0
+    'require-jsdoc': 0,
+    'react/prop-types': 0,
+    'react/react-in-jsx-scope': 'off',
+    'react/jsx-filename-extension': [1, { extensions: ['.ts', '.tsx'] }],
+    'new-cap': 0
   },
   settings: {
     react: {
-      version: 'detect',
-      'react/react-in-jsx-scope': 'off',
-      'react/jsx-filename-extension': [1, { extensions: ['.ts', '.tsx'] }]
+      version: 'detect'
     }
   }
 };
