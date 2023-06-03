@@ -34,9 +34,6 @@ const NavBar = ({ toggle }: any) => {
         </svg>
       </div>
       <div className='pr-8 hidden md:flex items-center'>
-        <Link href='/blog/create' className='mx-5 cursor-pointer'>
-          Write a Blog
-        </Link>
         {status !== 'authenticated' && (
           <Link href='/login' className='mx-5 cursor-pointer'>
             Sign In
@@ -44,6 +41,9 @@ const NavBar = ({ toggle }: any) => {
         )}
         {status === 'authenticated' && (
           <div className='flex items-center'>
+            <Link href='/blog/create' className='mx-5 cursor-pointer'>
+              Write a Blog
+            </Link>
             <Button
               variant='secondary'
               onClick={() => signOut()}

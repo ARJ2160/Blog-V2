@@ -7,7 +7,7 @@ import { Icons } from '../components/icons';
 import { FaGoogle } from 'react-icons/fa';
 import { Input } from '../components/ui/input';
 import { useEffect, useState } from 'react';
-import { useSession, signIn, signOut } from 'next-auth/react';
+import { useSession, signIn } from 'next-auth/react';
 
 const SignIn = (): JSX.Element => {
   const { data: session } = useSession();
@@ -16,7 +16,7 @@ const SignIn = (): JSX.Element => {
   useEffect(() => console.log('>>', session), [session]);
 
   const handleOAuthSignIn = (type: string) => {
-    signIn(type);
+    signIn(type, { callbackUrl: '/' });
   };
   // const handleSignIn = () => {
   //   const signInParams = { email, password };
@@ -91,11 +91,12 @@ const SignIn = (): JSX.Element => {
           </div>
         </CardContent>
         <div>
-          <Button className='w-full' onClick={() => signIn()}>
+          <Button
+            variant='secondary'
+            className='w-full bg-black text-white hover:text-black'
+            onClick={() => signIn()}
+          >
             Sign In
-          </Button>
-          <Button className='w-full' onClick={() => signOut()}>
-            Sign Out
           </Button>
         </div>
       </Card>
