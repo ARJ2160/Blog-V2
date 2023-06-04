@@ -4,11 +4,11 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { signOut, useSession } from 'next-auth/react';
 import { Button } from './ui/button';
+import { SessionTypes } from '../lib/types';
 
 const NavBar = ({ toggle }: any) => {
-  const { data: session, status }: any = useSession();
-
-  console.log('>>', session, status);
+  const { data: session, status }: SessionTypes = useSession();
+  console.log('>>', session);
   return (
     <nav className='bg-black h-20 w-screen text-white flex justify-between items-center fixed top-0'>
       <div className='nav--logo flex justify-center items-center ml-10'>
@@ -46,7 +46,11 @@ const NavBar = ({ toggle }: any) => {
             </Link>
             <Button
               variant='secondary'
-              onClick={() => signOut()}
+              onClick={() => {
+                signOut();
+                // redirect('/')
+                fetch('/');
+              }}
               className='mx-5 cursor-pointer'
             >
               Sign Out

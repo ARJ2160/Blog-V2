@@ -85,7 +85,7 @@ const ContactUs = () => {
 
             <div className='flex my-4 w-2/3 lg:w-1/2'>
               <a
-                href='https://www.facebook.com/ENLIGHTENEERING/'
+                href='/'
                 target='_blank'
                 rel='noreferrer'
                 className='rounded-full bg-blue-800 h-8 w-8 flex justify-center items-center mx-1 text-center'
@@ -93,7 +93,7 @@ const ContactUs = () => {
                 <FaFacebook />
               </a>
               <a
-                href='https://www.linkedin.com/company/enlighteneering-inc-'
+                href='/'
                 target='_blank'
                 rel='noreferrer'
                 className='rounded-full bg-pink-800 h-8 w-8 flex justify-center items-center mx-1 text-center'

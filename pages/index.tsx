@@ -9,7 +9,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import moment from 'moment';
 import { CircularProgress, Stack } from '@mui/material';
-import DesignTutorials from '../components/DesignTutorials';
 import ContactUs from '../components/ContactUs';
 
 export const getServerSideProps: GetServerSideProps = async () => {
@@ -35,17 +34,17 @@ const Home: NextPage = ({
       <div className='bg-[#121212] text-white flex min-h-screen flex-col items-center justify-center'>
         <div className='w-11/12 h-[2px] mb-10 mt-24 bg-gray-700'></div>
         <div className='flex flex-col items-center my-20 w-full'>
-          <div className='font-bold text-white uppercase lg:text-[12rem] md:text-8xl sm:text-6xl text-6xl'>
+          <div className='font-bold text-white uppercase lg:text-[12rem] md:text-[9rem] sm:text-[7rem] text-8xl'>
             <Link href='#'>THE BLOG</Link>
           </div>
         </div>
         <div className='w-11/12 h-[2px] mb-10 bg-gray-700'></div>
-        <div className='blogs mx-10 grid grid-cols-2'>
+        <div className='blogs mx-10 grid md:grid-cols-2 gird-cols-1'>
           <div className='main-blog col-span-1'>
             {blogs[0] ? (
               blogs.slice(0, 1).map((b: any, i: number) => {
                 return (
-                  <div className='first-blog' key={i}>
+                  <div className='first-blog md:my-0 my-10' key={i}>
                     <div className='blog-image'>
                       <Link
                         href={`/blog/${b?._id}`}
@@ -99,9 +98,9 @@ const Home: NextPage = ({
           </div>
         </div>
       </div>
-      <div className='bg-white text-[#121212] my-20'>
+      {/* <div className='bg-white text-[#121212] my-20'>
         <DesignTutorials />
-      </div>
+      </div> */}
       <div className=''>
         <ContactUs />
       </div>

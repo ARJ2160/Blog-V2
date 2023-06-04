@@ -8,9 +8,10 @@ import { FaGoogle } from 'react-icons/fa';
 import { Input } from '../components/ui/input';
 import { useEffect, useState } from 'react';
 import { useSession, signIn } from 'next-auth/react';
+import { SessionTypes } from '../lib/types';
 
 const SignIn = (): JSX.Element => {
-  const { data: session } = useSession();
+  const { data: session }: SessionTypes = useSession();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   useEffect(() => console.log('>>', session), [session]);
