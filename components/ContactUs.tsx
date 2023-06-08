@@ -1,5 +1,6 @@
 import React from 'react';
 import { FaFacebook, FaInstagram } from 'react-icons/fa';
+import { Button } from './ui/button';
 
 const ContactUs = () => {
   return (
@@ -7,7 +8,7 @@ const ContactUs = () => {
       <div className='container mx-auto my-4 lg:px-16'>
         <div className='w-full p-8 my-4 md:px-12 lg:w-9/12 lg:pl-20 lg:pr-40 mr-auto rounded-2xl shadow-2xl'>
           <div className='flex'>
-            <h1 className='font-bold uppercase text-5xl'>
+            <h1 className='font-bold uppercase sm:text-5xl text-3xl'>
               Send us a <br /> message
             </h1>
           </div>
@@ -40,12 +41,13 @@ const ContactUs = () => {
             ></textarea>
           </div>
           <div className='my-2 w-1/2 lg:w-1/4'>
-            <button
-              className='uppercase text-sm font-bold tracking-wide bg-blue-900 text-gray-100 p-3 rounded-lg w-full 
+            <Button
+              className='uppercase text-sm font-bold tracking-wide hover:bg-black hover:text-white p-3 rounded-lg w-full 
                       focus:outline-none focus:shadow-outline'
+              variant='secondary'
             >
               Send Message
-            </button>
+            </Button>
           </div>
         </div>
 

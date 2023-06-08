@@ -16,22 +16,33 @@ const NavBar = ({ toggle }: any) => {
           <Image src={Logo} alt='logo' width={120} height={120} />
         </Link>
       </div>
-      <div className='px-4 cursor-pointer md:hidden' onClick={toggle}>
-        <svg
-          xmlns='http://www.w3.org/2000/svg'
-          className='h-6 w-6'
-          fill='none'
-          viewBox='0 0 24 24'
-          stroke='currentColor'
-        >
-          <path
-            strokeLinecap='round'
-            strokeLinejoin='round'
-            strokeWidth={2}
-            d='M4 6h16M4 12h16M4 18h16'
-            fill='#000'
+      <div className='flex items-center'>
+        {status === 'authenticated' && session && session.user && (
+          <Image
+            className='rounded-full'
+            src={session.user.image as string}
+            width={'50'}
+            height={'50'}
+            alt='user image'
           />
-        </svg>
+        )}
+        <div className='px-4 cursor-pointer md:hidden' onClick={toggle}>
+          <svg
+            xmlns='http://www.w3.org/2000/svg'
+            className='h-6 w-6'
+            fill='none'
+            viewBox='0 0 24 24'
+            stroke='currentColor'
+          >
+            <path
+              strokeLinecap='round'
+              strokeLinejoin='round'
+              strokeWidth={2}
+              d='M4 6h16M4 12h16M4 18h16'
+              fill='#000'
+            />
+          </svg>
+        </div>
       </div>
       <div className='pr-8 hidden md:flex items-center'>
         {status !== 'authenticated' && (
