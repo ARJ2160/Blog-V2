@@ -39,7 +39,7 @@ const Home: NextPage = ({
           </div>
         </div>
         <div className='w-11/12 h-[2px] mb-10 bg-gray-700'></div>
-        <div className='blogs mx-10 grid md:grid-cols-2 gird-cols-1'>
+        <div className='blogs mx-10 grid md:grid-cols-2 grid-cols-1'>
           <div className='main-blog col-span-1'>
             {blogs[0] ? (
               blogs.slice(0, 1).map((b: any, i: number) => {
