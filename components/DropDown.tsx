@@ -5,7 +5,7 @@ import { signOut, useSession } from 'next-auth/react';
 import { SessionTypes } from '../lib/types';
 
 const DropDown = ({ isOpen, toggle }: any) => {
-  const { data: session, status }: SessionTypes = useSession();
+  const { status }: SessionTypes = useSession();
   console.log('>>', status);
   return (
     <>
