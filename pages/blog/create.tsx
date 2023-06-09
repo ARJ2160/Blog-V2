@@ -12,7 +12,7 @@ const Create = (): JSX.Element => {
   const { data: session }: SessionTypes = useSession();
   const [description, setDescription] = useState('');
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
     const blog = {
       _id: uuidv4(),
@@ -20,11 +20,18 @@ const Create = (): JSX.Element => {
       postBody: description
     };
     console.log('>>', blog);
-    fetch((process.env.NEXT_PUBLIC_BACKEND_URL + 'postsdata') as string, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(blog)
-    }).then(() => {});
+    await fetch(
+      (process.env.NEXT_PUBLIC_BACKEND_URL + 'blog/create/post') as string,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'POST'
+        },
+        body: JSON.stringify(blog)
+      }
+    );
   };
 
   return (
