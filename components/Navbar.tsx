@@ -4,9 +4,9 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { signOut, useSession } from 'next-auth/react';
 import { Button } from './ui/button';
-import { SessionTypes } from '../lib/types';
+import { NavbarProps, SessionTypes } from '../lib/types';
 
-const NavBar = ({ toggle }: any) => {
+const NavBar = ({ toggle, isOpen }: NavbarProps) => {
   const { data: session, status }: SessionTypes = useSession();
   console.log('>>', session);
   return (
@@ -17,7 +17,7 @@ const NavBar = ({ toggle }: any) => {
         </Link>
       </div>
       <div className='flex items-center'>
-        {status === 'authenticated' && session && session.user && (
+        {isOpen && status === 'authenticated' && session && session.user && (
           <Image
             className='rounded-full'
             src={session.user.image as string}
