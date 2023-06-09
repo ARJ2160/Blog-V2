@@ -26,7 +26,7 @@ const Layout: FC<MyProps> = props => {
   });
   return (
     <main>
-      <Navbar toggle={toggle} />
+      <Navbar toggle={toggle} isOpen={isOpen} />
       <DropDown isOpen={isOpen} toggle={toggle} />
       {props.children}
     </main>
