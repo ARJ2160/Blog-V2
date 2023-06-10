@@ -6,12 +6,10 @@ import { Label } from '../components/ui/label';
 import { Icons } from '../components/icons';
 import { FaGoogle } from 'react-icons/fa';
 import { Input } from '../components/ui/input';
-import { useEffect, useState } from 'react';
-import { useSession, signIn } from 'next-auth/react';
-import { SessionTypes } from '../lib/types';
+import { useState } from 'react';
+import { signIn } from 'next-auth/react';
 
 const SignIn = (): JSX.Element => {
-  const { data: session }: SessionTypes = useSession();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
