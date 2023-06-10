@@ -6,7 +6,6 @@ import { SessionTypes } from '../lib/types';
 
 const DropDown = ({ isOpen, toggle }: any) => {
   const { status }: SessionTypes = useSession();
-  console.log('>>', status);
   return (
     <>
       <div

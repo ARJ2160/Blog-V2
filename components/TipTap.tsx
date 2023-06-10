@@ -98,13 +98,12 @@ const MenuBar = ({ editor }: any) => {
   );
 };
 
-export const Tiptap = ({ setDescription }: any) => {
+export const Tiptap = ({ description, setDescription }: any) => {
   const HTML_REGEX = /<\/?[^>]+(>|$)/g;
 
   const editor = useEditor({
     extensions: [StarterKit, Underline, Image],
-    content: ``,
-
+    content: description,
     onUpdate: ({ editor }) => {
       const html = editor.getHTML();
       const removeHtmlTags = html.replace(HTML_REGEX, '');

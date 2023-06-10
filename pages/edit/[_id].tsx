@@ -1,32 +1,44 @@
 'use client';
 
 import { useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 import React from 'react';
-import { Tiptap } from '../../components/TipTap';
 import { SessionTypes } from '../../lib/types';
 import { useSession } from 'next-auth/react';
+import { Tiptap } from '../../components/TipTap';
 import { Button } from '../../components/ui/button';
 
-const Create = (): JSX.Element => {
+export const getServerSideProps = async (context: any) => {
+  console.log('>>', context.params);
+  const _id = context.params?._id;
+  const res = await fetch(
+    (process.env.NEXT_PUBLIC_BACKEND_URL + 'postsdata/' + _id) as string
+  ).then(res => res.json());
+  return {
+    props: {
+      blogDetails: res
+    }
+  };
+};
+
+const EditPost = ({ blogDetails }: any): JSX.Element => {
   const { data: session }: SessionTypes = useSession();
-  const [description, setDescription] = useState('');
+  const [description, setDescription] = useState(blogDetails.postBody);
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     const blog = {
-      _id: uuidv4(),
       author: session?.user?.name,
       postBody: description
     };
     await fetch(
-      (process.env.NEXT_PUBLIC_BACKEND_URL + 'postsdata') as string,
+      (process.env.NEXT_PUBLIC_BACKEND_URL +
+        `postsdata/update/${blogDetails._id}`) as string,
       {
-        method: 'POST',
+        method: 'PUT',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
           'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Methods': 'POST'
+          'Access-Control-Allow-Methods': 'PUT'
         },
         body: JSON.stringify(blog)
       }
@@ -35,7 +47,7 @@ const Create = (): JSX.Element => {
 
   return (
     <div className='mt-40 flex flex-col justify-center items'>
-      <Tiptap setDescription={setDescription} />
+      <Tiptap description={description} setDescription={setDescription} />
       <Button
         className='h-16 bg-black text-white hover:bg-black '
         variant='secondary'
@@ -47,4 +59,4 @@ const Create = (): JSX.Element => {
   );
 };
 
-export default Create;
+export default EditPost;

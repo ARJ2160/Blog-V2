@@ -14,7 +14,6 @@ const SignIn = (): JSX.Element => {
   const { data: session }: SessionTypes = useSession();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  useEffect(() => console.log('>>', session), [session]);
 
   const handleOAuthSignIn = (type: string) => {
     signIn(type, { callbackUrl: '/' });
