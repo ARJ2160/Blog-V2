@@ -19,18 +19,15 @@ const Create = (): JSX.Element => {
       author: session?.user?.name,
       postBody: description
     };
-    await fetch(
-      (process.env.NEXT_PUBLIC_BACKEND_URL + 'postsdata') as string,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-          'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Methods': 'POST'
-        },
-        body: JSON.stringify(blog)
-      }
-    );
+    await fetch((process.env.NEXT_PUBLIC_BACKEND_URL + 'postsdata') as string, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'POST'
+      },
+      body: JSON.stringify(blog)
+    });
   };
 
   return (
