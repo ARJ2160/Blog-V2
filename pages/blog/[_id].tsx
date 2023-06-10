@@ -158,10 +158,10 @@ const BlogDetails = ({ blogDetails }: any) => {
               />
             </div>
             <a
-              href='#'
+              href={`/edit/${_id}`}
               className='w-full bg-blue-800 text-white font-bold text-sm uppercase rounded hover:bg-blue-700 flex items-center justify-center px-2 py-3 mt-6'
             >
-              <i className='fab fa-instagram mr-2'></i> Follow @dgrzyb
+              <i className='fab fa-instagram mr-2'></i> EDIT POST
             </a>
           </div>
         </aside>

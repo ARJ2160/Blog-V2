@@ -7,9 +7,8 @@ import { Button } from './ui/button';
 import { NavbarProps, SessionTypes } from '../lib/types';
 import { Icons } from './icons';
 
-const NavBar = ({ toggle, isOpen }: NavbarProps) => {
+const NavBar = ({ toggle }: NavbarProps) => {
   const { data: session, status }: SessionTypes = useSession();
-  console.log('>>', session);
   return (
     <nav className='bg-black h-20 w-screen text-white flex justify-between items-center fixed top-0'>
       <div className='nav--logo flex justify-center items-center ml-10'>

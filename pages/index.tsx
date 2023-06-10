@@ -27,8 +27,6 @@ const Home: NextPage = ({
 }: InferGetServerSidePropsType<typeof getServerSideProps>): JSX.Element => {
   const blogDate = moment().format('D MMM YYYY');
 
-  console.log(blogs);
-
   return (
     <React.Fragment>
       <div className='bg-[#121212] text-white flex min-h-screen flex-col items-center justify-center'>
