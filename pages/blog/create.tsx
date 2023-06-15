@@ -19,10 +19,11 @@ const Create = (): JSX.Element => {
       author: session?.user?.name,
       postBody: description
     };
+    console.log('>> posted', blog);
     await fetch((process.env.NEXT_PUBLIC_BACKEND_URL + 'postsdata') as string, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
+        'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': 'POST'
       },
