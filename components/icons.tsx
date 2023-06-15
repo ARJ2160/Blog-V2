@@ -23,6 +23,7 @@ import {
   Twitter,
   User,
   X,
+  Loader,
   type Icon as LucideIcon
 } from 'lucide-react';
 
@@ -85,6 +86,7 @@ export const Icons = {
       />
     </svg>
   ),
+  loading: Loader,
   twitter: Twitter,
   check: Check
 };

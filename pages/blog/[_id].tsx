@@ -1,5 +1,8 @@
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
+import { Button } from '../../components/ui/button';
+import { useRouter } from 'next/router';
+import { Icons } from '../../components/icons';
 
 export const getServerSideProps = async (context: any) => {
   const _id = context.params?._id;
@@ -14,11 +17,13 @@ export const getServerSideProps = async (context: any) => {
 };
 
 const BlogDetails = ({ blogDetails }: any) => {
+  const router = useRouter();
   const [author, setAuthor] = useState<string>(blogDetails?.author);
   const [title, setTitle] = useState<string>(blogDetails?.title);
   const [postBody, setPostBody] = useState(blogDetails?.postBody);
   const [imageSrc, setImageSrc] = useState(blogDetails?.imagesrc);
   const [_id, setId] = useState(blogDetails?._id);
+  const [loading, setLoading] = useState<boolean>(false);
   const blogDate = moment().format('D MMM YYYY');
 
   useEffect(() => {
@@ -28,6 +33,26 @@ const BlogDetails = ({ blogDetails }: any) => {
     setId(blogDetails?._id);
     setPostBody(() => blogDetails?.postBody.replace(/<\/?[^>]+(>|$)/g, ' '));
   }, []);
+
+  const deleteBlog = async (e: any) => {
+    e.preventDefault();
+    setLoading(true);
+    await fetch(
+      (process.env.NEXT_PUBLIC_BACKEND_URL + 'postsdata/' + _id) as string,
+      { method: 'DELETE' }
+    )
+      .then(() => {
+        setTimeout(() => {
+          setLoading(false);
+          router.push('/');
+        }, 1500);
+      })
+      .catch(err => console.log(err));
+  };
+
+  const editBlog = () => {
+    router.push('/edit/' + _id);
+  };
 
   return (
     <div key={_id}>
@@ -103,18 +128,24 @@ const BlogDetails = ({ blogDetails }: any) => {
         </section>
         <aside className='w-full md:w-1/3 flex flex-col items-center px-3'>
           <div className='w-full bg-white shadow flex flex-col my-4 p-6'>
-            <p className='text-xl font-semibold pb-5'>About Us</p>
-            <p className='pb-2'>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas
-              mattis est eu odio sagittis tristique. Vestibulum ut finibus leo.
-              In hac habitasse platea dictumst.
-            </p>
-            <a
-              href='#'
-              className='w-full bg-blue-800 text-white font-bold text-sm uppercase rounded hover:bg-blue-700 flex items-center justify-center px-2 py-3 mt-4'
+            <Button
+              onClick={editBlog}
+              className='w-full bg-blue-600 hover:bg-blue-600 text-white font-bold text-sm uppercase rounded flex items-center justify-center px-2 py-3 mt-4'
             >
-              Get to know us
-            </a>
+              Edit Blog
+            </Button>
+            <Button
+              onClick={deleteBlog}
+              className='w-full bg-red-600 hover:bg-red-600 text-white font-bold text-sm uppercase rounded flex items-center justify-center px-2 py-3 mt-4'
+            >
+              {loading ? (
+                <div className='animate-spin'>
+                  <Icons.loading />
+                </div>
+              ) : (
+                'Delete Blog'
+              )}
+            </Button>
           </div>
 
           <div className='w-full bg-white shadow flex flex-col my-4 p-6'>
@@ -157,12 +188,6 @@ const BlogDetails = ({ blogDetails }: any) => {
                 src='https://source.unsplash.com/collection/1346951/150x150?sig=9'
               />
             </div>
-            <a
-              href={`/edit/${_id}`}
-              className='w-full bg-blue-800 text-white font-bold text-sm uppercase rounded hover:bg-blue-700 flex items-center justify-center px-2 py-3 mt-6'
-            >
-              <i className='fab fa-instagram mr-2'></i> EDIT POST
-            </a>
           </div>
         </aside>
       </div>
