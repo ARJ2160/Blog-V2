@@ -3,7 +3,7 @@ import type {
   InferGetServerSidePropsType,
   NextPage
 } from 'next';
-import React from 'react';
+import React, { useEffect } from 'react';
 import Blog from './Blog';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -27,6 +27,9 @@ const Home: NextPage = ({
 }: InferGetServerSidePropsType<typeof getServerSideProps>): JSX.Element => {
   const blogDate = moment().format('D MMM YYYY');
 
+  useEffect(() => {
+    console.log('>> blogs', blogs);
+  }, [blogs]);
   return (
     <React.Fragment>
       <div className='bg-[#121212] text-white flex min-h-screen flex-col items-center justify-center'>
@@ -96,9 +99,6 @@ const Home: NextPage = ({
           </div>
         </div>
       </div>
-      {/* <div className='bg-white text-[#121212] my-20'>
-        <DesignTutorials />
-      </div> */}
       <div className=''>
         <ContactUs />
       </div>
