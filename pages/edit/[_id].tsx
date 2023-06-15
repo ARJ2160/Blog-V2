@@ -6,6 +6,7 @@ import { SessionTypes } from '../../lib/types';
 import { useSession } from 'next-auth/react';
 import { Tiptap } from '../../components/TipTap';
 import { Button } from '../../components/ui/button';
+import { useRouter } from 'next/router';
 
 export const getServerSideProps = async (context: any) => {
   console.log('>>', context.params);
@@ -21,6 +22,7 @@ export const getServerSideProps = async (context: any) => {
 };
 
 const EditPost = ({ blogDetails }: any): JSX.Element => {
+  const router = useRouter();
   const { data: session }: SessionTypes = useSession();
   const [description, setDescription] = useState(blogDetails.postBody);
 
@@ -42,7 +44,13 @@ const EditPost = ({ blogDetails }: any): JSX.Element => {
         },
         body: JSON.stringify(blog)
       }
-    );
+    ).then(res => {
+      if (res.ok) {
+        setTimeout(() => {
+          router.push('/');
+        }, 1500);
+      }
+    });
   };
 
   return (

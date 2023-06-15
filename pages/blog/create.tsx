@@ -9,6 +9,7 @@ import { useSession } from 'next-auth/react';
 import { Button } from '../../components/ui/button';
 import { useRouter } from 'next/router';
 import { Icons } from '../../components/icons';
+import moment from 'moment';
 
 const Create = (): JSX.Element => {
   const router = useRouter();
@@ -24,7 +25,7 @@ const Create = (): JSX.Element => {
       _id: uuidv4(),
       author: session?.user?.name,
       postBody: description,
-      postDate: new Date()
+      postDate: moment().format('D MMM YYYY')
     };
     console.log('>> posted', blog);
     await fetch((process.env.NEXT_PUBLIC_BACKEND_URL + 'postsdata') as string, {
