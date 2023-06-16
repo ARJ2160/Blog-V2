@@ -41,9 +41,6 @@ const DropDown = ({ isOpen, toggle }: any) => {
             </Button>
           </>
         )}
-        <Link href='/' className='p-4'>
-          Download
-        </Link>
       </div>
     </>
   );
