@@ -20,6 +20,7 @@ module.exports = {
     'react/jsx-filename-extension': [1, { extensions: ['.ts', '.tsx'] }],
     'new-cap': 0
   },
+  ignorePatterns: ['public/*'],
   settings: {
     react: {
       version: 'detect'
