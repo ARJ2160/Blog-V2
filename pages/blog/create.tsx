@@ -8,7 +8,7 @@ import { SessionTypes } from '../../lib/types';
 import { useSession } from 'next-auth/react';
 import { Button } from '../../components/ui/button';
 import { useRouter } from 'next/router';
-import { Icons } from '../../components/icons';
+import { Icons } from '../../components/Icons';
 import moment from 'moment';
 
 const Create = (): JSX.Element => {

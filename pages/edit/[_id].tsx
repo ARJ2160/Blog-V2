@@ -9,7 +9,6 @@ import { Button } from '../../components/ui/button';
 import { useRouter } from 'next/router';
 
 export const getServerSideProps = async (context: any) => {
-  console.log('>>', context.params);
   const _id = context.params?._id;
   const res = await fetch(
     (process.env.NEXT_PUBLIC_BACKEND_URL + 'postsdata/' + _id) as string
@@ -23,12 +22,14 @@ export const getServerSideProps = async (context: any) => {
 
 const EditPost = ({ blogDetails }: any): JSX.Element => {
   const router = useRouter();
+  console.log('>>', blogDetails);
   const { data: session }: SessionTypes = useSession();
   const [description, setDescription] = useState(blogDetails.postBody);
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     const blog = {
+      title: blogDetails.title,
       author: session?.user?.name,
       postBody: description
     };
@@ -54,7 +55,7 @@ const EditPost = ({ blogDetails }: any): JSX.Element => {
   };
 
   return (
-    <div className='mt-40 flex flex-col justify-center items'>
+    <div className='mt-40 mx-24 flex flex-col justify-center items'>
       <Tiptap description={description} setDescription={setDescription} />
       <Button
         className='h-16 bg-black text-white hover:bg-black '

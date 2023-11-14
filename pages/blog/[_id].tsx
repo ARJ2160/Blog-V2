@@ -4,7 +4,7 @@ import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import { Button } from '../../components/ui/button';
 import { useRouter } from 'next/router';
-import { Icons } from '../../components/icons';
+import { Icons } from '../../components/Icons';
 import Image from 'next/image';
 import Head from 'next/head';
 
@@ -35,7 +35,8 @@ const BlogDetails = ({ blogDetails }: any) => {
     setTitle(blogDetails?.title);
     setImageSrc(blogDetails?.imagesrc);
     setId(blogDetails?._id);
-    setPostBody(() => blogDetails?.postBody.replace(/<\/?[^>]+(>|$)/g, ' '));
+    setPostBody(() => blogDetails?.postBody?.replace(/<\/?[^>]+(>|$)/g, ' '));
+    console.log('>>', blogDetails);
   }, []);
 
   const deleteBlog = async (e: any) => {
@@ -89,59 +90,6 @@ const BlogDetails = ({ blogDetails }: any) => {
                 </div>
               </div>
             </article>
-            <div className='w-full flex pt-6'>
-              <a
-                href='#'
-                className='w-1/2 bg-white shadow hover:shadow-md text-left p-6'
-              >
-                <p className='text-lg text-blue-800 font-bold flex items-center'>
-                  <i className='fas fa-arrow-left pr-1'></i> Previous
-                </p>
-                <p className='pt-2'>
-                  Lorem Ipsum Dolor Sit Amet Dolor Sit Amet
-                </p>
-              </a>
-              <a
-                href='#'
-                className='w-1/2 bg-white shadow hover:shadow-md text-right p-6'
-              >
-                <p className='text-lg text-blue-800 font-bold flex items-center justify-end'>
-                  Next <i className='fas fa-arrow-right pl-1'></i>
-                </p>
-                <p className='pt-2'>
-                  Lorem Ipsum Dolor Sit Amet Dolor Sit Amet
-                </p>
-              </a>
-            </div>
-            <div className='w-full flex flex-col text-center md:text-left md:flex-row shadow bg-white mt-10 mb-10 p-6'>
-              <div className='w-full md:w-1/5 flex justify-center md:justify-start pb-4'>
-                <img
-                  src='https://source.unsplash.com/collection/1346951/150x150?sig=1'
-                  className='rounded-full shadow h-32 w-32'
-                />
-              </div>
-              <div className='flex-1 flex flex-col justify-center md:justify-start'>
-                <p className='font-semibold text-2xl'>David</p>
-                <p className='pt-2'>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Curabitur vel neque non libero suscipit suscipit eu eu urna.
-                </p>
-                <div className='flex items-center justify-center md:justify-start text-2xl no-underline text-blue-800 pt-4'>
-                  <a className='' href='#'>
-                    <i className='fab fa-facebook'></i>
-                  </a>
-                  <a className='pl-4' href='#'>
-                    <i className='fab fa-instagram'></i>
-                  </a>
-                  <a className='pl-4' href='#'>
-                    <i className='fab fa-twitter'></i>
-                  </a>
-                  <a className='pl-4' href='#'>
-                    <i className='fab fa-linkedin'></i>
-                  </a>
-                </div>
-              </div>
-            </div>
           </section>
           <aside className='w-full md:w-1/3 flex flex-col items-center px-3'>
             <div className='w-full bg-white shadow flex flex-col my-4 p-6'>
@@ -163,84 +111,6 @@ const BlogDetails = ({ blogDetails }: any) => {
                   'Delete Blog'
                 )}
               </Button>
-            </div>
-
-            <div className='w-full bg-white shadow flex flex-col my-4 p-6'>
-              <p className='text-xl font-semibold pb-5'>Other Blogs</p>
-              <div className='grid grid-cols-3 gap-3'>
-                <Image
-                  alt='grid-images'
-                  loading='lazy'
-                  width={200}
-                  height={200}
-                  className='hover:opacity-75'
-                  src='https://source.unsplash.com/collection/1346951/150x150?sig=1'
-                />
-                <Image
-                  alt='grid-images'
-                  loading='lazy'
-                  width={200}
-                  height={200}
-                  className='hover:opacity-75'
-                  src='https://source.unsplash.com/collection/1346951/150x150?sig=2'
-                />
-                <Image
-                  alt='grid-images'
-                  loading='lazy'
-                  width={200}
-                  height={200}
-                  className='hover:opacity-75'
-                  src='https://source.unsplash.com/collection/1346951/150x150?sig=3'
-                />
-                <Image
-                  alt='grid-images'
-                  loading='lazy'
-                  width={200}
-                  height={200}
-                  className='hover:opacity-75'
-                  src='https://source.unsplash.com/collection/1346951/150x150?sig=4'
-                />
-                <Image
-                  alt='grid-images'
-                  loading='lazy'
-                  width={200}
-                  height={200}
-                  className='hover:opacity-75'
-                  src='https://source.unsplash.com/collection/1346951/150x150?sig=5'
-                />
-                <Image
-                  alt='grid-images'
-                  loading='lazy'
-                  width={200}
-                  height={200}
-                  className='hover:opacity-75'
-                  src='https://source.unsplash.com/collection/1346951/150x150?sig=6'
-                />
-                <Image
-                  alt='grid-images'
-                  loading='lazy'
-                  width={200}
-                  height={200}
-                  className='hover:opacity-75'
-                  src='https://source.unsplash.com/collection/1346951/150x150?sig=7'
-                />
-                <Image
-                  alt='grid-images'
-                  loading='lazy'
-                  width={200}
-                  height={200}
-                  className='hover:opacity-75'
-                  src='https://source.unsplash.com/collection/1346951/150x150?sig=8'
-                />
-                <Image
-                  alt='grid-images'
-                  loading='lazy'
-                  width={200}
-                  height={200}
-                  className='hover:opacity-75'
-                  src='https://source.unsplash.com/collection/1346951/150x150?sig=9'
-                />
-              </div>
             </div>
           </aside>
         </div>

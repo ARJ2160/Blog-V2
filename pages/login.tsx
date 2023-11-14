@@ -3,7 +3,7 @@
 import { Button } from '../components/ui/button';
 import { Card, CardContent, CardHeader } from '../components/ui/card';
 import { Label } from '../components/ui/label';
-import { Icons } from '../components/icons';
+import { Icons } from '../components/Icons';
 import { FaGoogle } from 'react-icons/fa';
 import { Input } from '../components/ui/input';
 import { useState } from 'react';
@@ -16,22 +16,23 @@ const SignIn = (): JSX.Element => {
   const handleOAuthSignIn = (type: string) => {
     signIn(type, { callbackUrl: '/' });
   };
-  // const handleSignIn = () => {
-  //   const signInParams = { email, password };
-  //   fetch((process.env.NEXT_PUBLIC_BACKEND_URL + '/users/signin') as string, {
-  //     method: 'POST',
-  //     headers: { 'Content-Type': 'application/json' },
-  //     body: JSON.stringify(signInParams),
-  //     mode: 'no-cors'
-  //   }).then(res => {
-  //     if (res.status === 200) {
-  //       // redirect("/")
-  //       // history.push('/');
-  //     } else if (res.status === 422) {
-  //       window.alert('Wrong Password');
-  //     }
-  //   });
-  // };
+  const handleSignIn = () => {
+    const signInParams = { email, password };
+    if (!email || !password) return window.alert('Please fill all the fields');
+    fetch((process.env.NEXT_PUBLIC_BACKEND_URL + '/users/signin') as string, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(signInParams),
+      mode: 'no-cors'
+    }).then(res => {
+      if (res.status === 200) {
+        // redirect("/")
+        // history.push('/');
+      } else if (res.status === 422) {
+        window.alert('Wrong Password');
+      }
+    });
+  };
   return (
     <div className='flex justify-center'>
       <Card className='w-1/2 mt-40'>
@@ -92,7 +93,7 @@ const SignIn = (): JSX.Element => {
           <Button
             variant='secondary'
             className='w-full bg-black text-white hover:text-black'
-            onClick={() => signIn()}
+            onClick={handleSignIn}
           >
             Sign In
           </Button>
