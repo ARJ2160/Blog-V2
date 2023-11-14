@@ -6,7 +6,7 @@ import Text from '@tiptap/extension-text';
 import Typography from '@tiptap/extension-typography';
 import StarterKit from '@tiptap/starter-kit';
 import Underline from '@tiptap/extension-underline';
-import Image from '@tiptap/extension-image';
+
 import {
   FaBold,
   FaHeading,
@@ -113,15 +113,10 @@ export const Tiptap = ({
 }: TipTapProps) => {
   const HTML_REGEX = /<\/?[^>]+(>|$)/g;
 
-  Image.configure({
-    inline: true,
-    allowBase64: true
-  });
   const editor = useEditor({
     extensions: [
       StarterKit,
       Underline,
-      Image,
       Document,
       Paragraph,
       Text,
