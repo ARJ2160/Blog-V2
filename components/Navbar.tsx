@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { signOut, useSession } from 'next-auth/react';
 import { Button } from './ui/button';
 import { NavbarProps, SessionTypes } from '../lib/types';
-import { Icons } from './Icons';
+import { Icons } from './icons';
 
 const NavBar = ({ toggle }: NavbarProps) => {
   const { data: session, status }: SessionTypes = useSession();

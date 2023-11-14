@@ -4,7 +4,7 @@ import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import { Button } from '../../components/ui/button';
 import { useRouter } from 'next/router';
-import { Icons } from '../../components/Icons';
+import { Icons } from '../../components/icons';
 import Image from 'next/image';
 import Head from 'next/head';
 
