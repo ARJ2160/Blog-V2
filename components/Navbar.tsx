@@ -7,7 +7,7 @@ import { Button } from './ui/button';
 import { NavbarProps, SessionTypes } from '../lib/types';
 import { Icons } from './icons';
 
-const NavBar = ({ toggle }: NavbarProps) => {
+export const NavBar = ({ toggle }: NavbarProps) => {
   const { data: session, status }: SessionTypes = useSession();
   return (
     <nav className='bg-black h-20 w-screen text-white flex justify-between items-center fixed top-0'>
@@ -66,5 +66,3 @@ const NavBar = ({ toggle }: NavbarProps) => {
     </nav>
   );
 };
-
-export default NavBar;

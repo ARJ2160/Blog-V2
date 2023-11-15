@@ -3,11 +3,11 @@
 import { Button } from '../components/ui/button';
 import { Card, CardContent, CardHeader } from '../components/ui/card';
 import { Label } from '../components/ui/label';
-import { Icons } from '../components/icons';
 import { FaGoogle } from 'react-icons/fa';
 import { Input } from '../components/ui/input';
 import { useState } from 'react';
 import { signIn } from 'next-auth/react';
+import { Icons } from '../components';
 
 const SignIn = (): JSX.Element => {
   const [email, setEmail] = useState('');

@@ -2,7 +2,7 @@ import React from 'react';
 import { FaFacebook, FaInstagram } from 'react-icons/fa';
 import { Button } from './ui/button';
 
-const ContactUs = () => {
+export const ContactUs = () => {
   return (
     <div className='flex justify-center items-center bg-white'>
       <div className='container mx-auto my-4 lg:px-16'>
@@ -109,5 +109,3 @@ const ContactUs = () => {
     </div>
   );
 };
-
-export default ContactUs;

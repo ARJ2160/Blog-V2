@@ -1,12 +1,11 @@
 import React, { FC, ReactNode, useEffect, useState } from 'react';
-import Navbar from './Navbar';
-import DropDown from './DropDown';
+import { NavBar, DropDown } from './index';
 
 interface MyProps {
   children?: ReactNode;
 }
 
-const Layout: FC<MyProps> = props => {
+export const Layout: FC<MyProps> = props => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggle = () => {
@@ -26,11 +25,9 @@ const Layout: FC<MyProps> = props => {
   });
   return (
     <main>
-      <Navbar toggle={toggle} isOpen={isOpen} />
+      <NavBar toggle={toggle} isOpen={isOpen} />
       <DropDown isOpen={isOpen} toggle={toggle} />
       {props.children}
     </main>
   );
 };
-
-export default Layout;

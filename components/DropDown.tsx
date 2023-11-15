@@ -4,7 +4,7 @@ import { Button } from './ui/button';
 import { signOut, useSession } from 'next-auth/react';
 import { SessionTypes } from '../lib/types';
 
-const DropDown = ({ isOpen, toggle }: any) => {
+export const DropDown = ({ isOpen, toggle }: any) => {
   const { status }: SessionTypes = useSession();
   return (
     <>
@@ -45,5 +45,3 @@ const DropDown = ({ isOpen, toggle }: any) => {
     </>
   );
 };
-
-export default DropDown;

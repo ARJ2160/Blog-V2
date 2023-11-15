@@ -9,7 +9,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import moment from 'moment';
 import { CircularProgress, Stack } from '@mui/material';
-import ContactUs from '../components/ContactUs';
+import { ContactUs } from '../components';
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const res = await fetch(
