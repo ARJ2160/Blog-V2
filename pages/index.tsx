@@ -36,7 +36,7 @@ const Home: NextPage = ({
         <div className='w-11/12 h-[2px] mb-10 mt-24 bg-gray-700'></div>
         <div className='flex flex-col items-center my-20 w-full'>
           <div className='font-bold text-white uppercase lg:text-[12rem] md:text-[9rem] sm:text-[7rem] text-7xl'>
-            <Link href='#'>THE BLOG</Link>
+            <Link href='/'>THE BLOG</Link>
           </div>
         </div>
         <div className='w-11/12 h-[2px] bg-gray-700'></div>

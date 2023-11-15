@@ -48,11 +48,7 @@ const Create = (): JSX.Element => {
 
   return (
     <div className='mt-40 flex flex-col justify-center items-center'>
-      <Tiptap
-        description={description}
-        setDescription={setDescription}
-        // setImages={setImages}
-      />
+      <Tiptap description={description} setDescription={setDescription} />
       <Button
         className='h-16 bg-black text-white hover:bg-black '
         variant='secondary'

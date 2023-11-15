@@ -7,6 +7,7 @@ import { useSession } from 'next-auth/react';
 import { Tiptap } from '../../components/TipTap';
 import { Button } from '../../components/ui/button';
 import { useRouter } from 'next/router';
+import { Icons } from '../../components';
 
 export const getServerSideProps = async (context: any) => {
   const _id = context.params?._id;
@@ -25,9 +26,11 @@ const EditPost = ({ blogDetails }: any): JSX.Element => {
   console.log('>>', blogDetails);
   const { data: session }: SessionTypes = useSession();
   const [description, setDescription] = useState(blogDetails.postBody);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
+    setLoading(true);
     const blog = {
       title: blogDetails.title,
       author: session?.user?.name,
@@ -47,6 +50,7 @@ const EditPost = ({ blogDetails }: any): JSX.Element => {
       }
     ).then(res => {
       if (res.ok) {
+        setLoading(false);
         setTimeout(() => {
           router.push('/');
         }, 1500);
@@ -62,7 +66,13 @@ const EditPost = ({ blogDetails }: any): JSX.Element => {
         variant='secondary'
         onClick={handleSubmit}
       >
-        PUBLISH
+        {loading ? (
+          <div className='animate-spin'>
+            <Icons.loading />
+          </div>
+        ) : (
+          'PUBLISH'
+        )}
       </Button>
     </div>
   );

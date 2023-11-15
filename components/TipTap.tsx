@@ -22,6 +22,7 @@ import {
 import { SmilieReplacer } from '../lib/SimilieReplacer';
 import { ColorHighlighter } from '../lib/ColorHighlighter';
 import { TipTapProps } from '../lib/types';
+import { Input } from './ui/input';
 
 const MenuBar = ({ editor }: any) => {
   if (!editor) {
@@ -139,9 +140,20 @@ export const Tiptap = ({
   });
 
   return (
-    <div className='textEditor min-w-[80vw] min-h-[30rem] '>
-      <MenuBar editor={editor} />
-      <EditorContent editor={editor} />
-    </div>
+    <>
+      <div className='blog-title'>
+        <div>Title</div>
+        <div className='textEditor min-w-[50rem] !min-h-[50px]'>
+          <Input />
+        </div>
+      </div>
+      <div className='blog-body'>
+        <div>Blog Body</div>
+        <div className='textEditor min-w-[40vw] min-h-[15rem]'>
+          <MenuBar editor={editor} />
+          <EditorContent editor={editor} />
+        </div>
+      </div>
+    </>
   );
 };
