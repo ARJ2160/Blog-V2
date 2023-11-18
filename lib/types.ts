@@ -11,7 +11,8 @@ export interface NavbarProps {
 }
 
 export interface TipTapProps {
+  title: string;
+  setTitle: (title: string) => void;
   description: string;
   setDescription: (description: string) => void;
-  setImages?: (images: string) => void;
 }

@@ -108,9 +108,10 @@ const MenuBar = ({ editor }: any) => {
 };
 
 export const Tiptap = ({
+  title,
+  setTitle,
   description,
-  setDescription,
-  setImages
+  setDescription
 }: TipTapProps) => {
   const HTML_REGEX = /<\/?[^>]+(>|$)/g;
 
@@ -144,7 +145,7 @@ export const Tiptap = ({
       <div className='blog-title'>
         <div>Title</div>
         <div className='textEditor min-w-[50rem] !min-h-[50px]'>
-          <Input />
+          <Input value={title} onChange={e => setTitle(e.target.value)} />
         </div>
       </div>
       <div className='blog-body'>

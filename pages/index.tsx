@@ -54,7 +54,7 @@ const Home: NextPage = ({
                       >
                         <Image
                           className='w-11/12 h-3/4 object-center aspect-ratio'
-                          src={b.imagesrc}
+                          src={b.postImage}
                           width={b?.width || 100}
                           height={b?.height || 100}
                           loading='lazy'
