@@ -26,6 +26,7 @@ const EditPost = ({ blogDetails }: any): JSX.Element => {
   console.log('>>', blogDetails);
   const { data: session }: SessionTypes = useSession();
   const [description, setDescription] = useState(blogDetails.postBody);
+  const [postTitle, setPostTitle] = useState<string>(blogDetails.title);
   const [loading, setLoading] = useState<boolean>(false);
 
   const handleSubmit = async (e: any) => {
@@ -60,7 +61,12 @@ const EditPost = ({ blogDetails }: any): JSX.Element => {
 
   return (
     <div className='mt-40 mx-24 flex flex-col justify-center items'>
-      <Tiptap description={description} setDescription={setDescription} />
+      <Tiptap
+        title={postTitle}
+        setTitle={setPostTitle}
+        description={description}
+        setDescription={setDescription}
+      />
       <Button
         className='h-16 bg-black text-white hover:bg-black '
         variant='secondary'

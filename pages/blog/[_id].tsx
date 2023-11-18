@@ -25,7 +25,7 @@ const BlogDetails = ({ blogDetails }: any) => {
   const [author, setAuthor] = useState<string>(blogDetails?.author);
   const [title, setTitle] = useState<string>(blogDetails?.title);
   const [postBody, setPostBody] = useState(blogDetails?.postBody);
-  const [imageSrc, setImageSrc] = useState(blogDetails?.imagesrc);
+  const [imageSrc, setImageSrc] = useState(blogDetails?.postImage);
   const [_id, setId] = useState(blogDetails?._id);
   const [loading, setLoading] = useState<boolean>(false);
   const blogDate = moment().format('D MMM YYYY');
@@ -33,7 +33,7 @@ const BlogDetails = ({ blogDetails }: any) => {
   useEffect(() => {
     setAuthor(blogDetails?.author);
     setTitle(blogDetails?.title);
-    setImageSrc(blogDetails?.imagesrc);
+    setImageSrc(blogDetails?.postImage);
     setId(blogDetails?._id);
     setPostBody(() => blogDetails?.postBody?.replace(/<\/?[^>]+(>|$)/g, ' '));
     console.log('>>', blogDetails);

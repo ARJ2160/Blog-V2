@@ -7,14 +7,14 @@ const Blog = ({ blog }: any): JSX.Element => {
   // const [author, setAuthor] = useState(blog?.author);
   const [title, setTitle] = useState(blog?.title);
   const [postBody, setPostBody] = useState(blog?.postBody);
-  const [imageSrc, setImageSrc] = useState(blog?.imagesrc);
+  const [imageSrc, setImageSrc] = useState(blog?.postImage);
   const [_id, setId] = useState(blog?._id);
   const blogDate = moment().format('MMM Do YYYY');
 
   useEffect(() => {
     // setAuthor(blog?.author);
     setTitle(blog?.title);
-    setImageSrc(blog?.imagesrc);
+    setImageSrc(blog?.postImage);
     setId(blog?._id);
     setPostBody(() => {
       return blog?.postBody
