@@ -11,6 +11,7 @@ import { useRouter } from 'next/router';
 import { Icons } from '../../components/icons';
 import moment from 'moment';
 import { Input } from '../../components/ui/input';
+import Image from 'next/image';
 
 const Create = (): JSX.Element => {
   const router = useRouter();
@@ -71,13 +72,22 @@ const Create = (): JSX.Element => {
 
   return (
     <div className='mt-40 flex flex-col justify-center items-center'>
-      <div className='blog-image-upload'>
+      <div className='blog-image-upload '>
+        <div>Upload an Image for your Blog</div>
+        {postImage && (
+          <Image
+            className='w-32 h-32'
+            width={100}
+            height={100}
+            src={postImage}
+            alt={'Cant render Image'}
+          />
+        )}
         <Input
           type={'file'}
           onChange={handleImageUpload}
           accept={'.jpeg, .png, .jpg'}
         />
-        <Button variant='secondary' />
       </div>
       <Tiptap
         title={postTitle}
