@@ -1,6 +1,6 @@
 import React from 'react';
 import { FaFacebook, FaInstagram } from 'react-icons/fa';
-import { Button } from './ui/button';
+import { Button } from './index';
 
 export const ContactUs = () => {
   return (

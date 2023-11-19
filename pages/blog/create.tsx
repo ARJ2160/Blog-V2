@@ -3,14 +3,12 @@
 import { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import React from 'react';
-import { Tiptap } from '../../components/TipTap';
+import { Button, Input, Tiptap } from '../../components/index';
 import { SessionTypes } from '../../lib/types';
 import { useSession } from 'next-auth/react';
-import { Button } from '../../components/ui/button';
 import { useRouter } from 'next/router';
 import { Icons } from '../../components/icons';
 import moment from 'moment';
-import { Input } from '../../components/ui/input';
 import Image from 'next/image';
 
 const Create = (): JSX.Element => {

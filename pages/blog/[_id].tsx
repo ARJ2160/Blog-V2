@@ -2,7 +2,7 @@
 
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
-import { Button } from '../../components/ui/button';
+import { Button } from '../../components/index';
 import { useRouter } from 'next/router';
 import { Icons } from '../../components/icons';
 import Image from 'next/image';

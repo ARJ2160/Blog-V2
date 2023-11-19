@@ -4,10 +4,8 @@ import { useState } from 'react';
 import React from 'react';
 import { SessionTypes } from '../../lib/types';
 import { useSession } from 'next-auth/react';
-import { Tiptap } from '../../components/TipTap';
-import { Button } from '../../components/ui/button';
 import { useRouter } from 'next/router';
-import { Icons } from '../../components';
+import { Button, Icons, Tiptap } from '../../components';
 
 export const getServerSideProps = async (context: any) => {
   const _id = context.params?._id;

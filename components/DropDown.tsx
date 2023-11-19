@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import React from 'react';
-import { Button } from './ui/button';
+import { Button } from './index';
 import { signOut, useSession } from 'next-auth/react';
 import { SessionTypes } from '../lib/types';
 
