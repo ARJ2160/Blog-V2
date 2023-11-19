@@ -32,6 +32,7 @@
     "axios": "^1.6.1",
     "class-variance-authority": "^0.6.1",
     "clsx": "^1.2.1",
+    "compress-base64": "^1.0.2",
     "lucide-react": "^0.233.0",
     "moment": "^2.29.4",
     "next": "latest",

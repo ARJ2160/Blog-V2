@@ -68,6 +68,9 @@ dependencies:
   clsx:
     specifier: ^1.2.1
     version: 1.2.1
+  compress-base64:
+    specifier: ^1.0.2
+    version: 1.0.2
   lucide-react:
     specifier: ^0.233.0
     version: 0.233.0(react@18.2.0)
@@ -3167,6 +3170,10 @@ packages:
 
   /commondir@1.0.1:
     resolution: {integrity: sha512-W9pAhw0ja1Edb5GVdIF1mjZw/ASI0AlShXM83UUGe2DVr5TdAPEA1OA8m/g8zWp9x6On7gqufY+FatDbC3MDQg==}
+    dev: false
+
+  /compress-base64@1.0.2:
+    resolution: {integrity: sha512-Sp8/Sa5XEZse+4hz4KkfFrFJiMZ7t6ACFkGU5uypfRF/puqclWGpaK8whjYXUQCq0yYJ9ca3ZcZHDGCFDoPe8w==}
     dev: false
 
   /concat-map@0.0.1:

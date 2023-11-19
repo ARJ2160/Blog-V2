@@ -3,13 +3,13 @@
 import { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import React from 'react';
-import { Button, Input, Tiptap } from '../../components/index';
+import { Button, Icons, Input, Tiptap } from '../../components/index';
 import { SessionTypes } from '../../lib/types';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
-import { Icons } from '../../components/icons';
 import moment from 'moment';
 import Image from 'next/image';
+import compress from 'compress-base64';
 
 const Create = (): JSX.Element => {
   const router = useRouter();
@@ -53,17 +53,25 @@ const Create = (): JSX.Element => {
     let file;
     if (e.target.files && e.target.files.length) {
       file = e.target.files[0];
-      const postImage = await convertToBase64(file);
+      const postImage = await compressAndConvertToBase64(file);
       setPostImages(postImage);
     }
   };
 
-  const convertToBase64 = async (file: File): Promise<string> => {
+  const compressAndConvertToBase64 = async (file: File): Promise<string> => {
     return new Promise((resolve, reject) => {
       const fileReader = new FileReader();
       // Convert to Base 64
       fileReader.readAsDataURL(file);
-      fileReader.onload = () => resolve(fileReader.result as string);
+      fileReader.onload = () => {
+        compress(fileReader.result as string, {
+          width: 500,
+          type: 'image/png',
+          max: 200,
+          min: 20,
+          quality: 0.8
+        }).then(result => resolve(result as string));
+      };
       fileReader.onerror = err => reject(err);
     });
   };
