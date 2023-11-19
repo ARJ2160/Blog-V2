@@ -66,7 +66,6 @@ const Create = (): JSX.Element => {
       fileReader.onload = () => {
         compress(fileReader.result as string, {
           width: 500,
-          type: 'image/png',
           max: 200,
           min: 20,
           quality: 0.8
