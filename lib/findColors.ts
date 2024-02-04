@@ -1,7 +1,7 @@
 import { Node } from '@tiptap/pm/model';
 import { Decoration, DecorationSet } from '@tiptap/pm/view';
 
-export const findColors = (doc: Node): DecorationSet => {
+export default function (doc: Node): DecorationSet {
   const hexColor = /(#[0-9a-f]{3,6})\b/gi;
   const decorations: Decoration[] = [];
 
@@ -25,4 +25,4 @@ export const findColors = (doc: Node): DecorationSet => {
   });
 
   return DecorationSet.create(doc, decorations);
-};
+}

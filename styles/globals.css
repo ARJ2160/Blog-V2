@@ -205,3 +205,33 @@ button.is_active {
   padding: 2px 3px;
   border-radius: 2px;
 }
+
+/* Basic editor styles */
+.tiptap {
+  > * + * {
+    margin-top: 0.75em;
+  }
+
+  code {
+    background-color: rgba(#616161, 0.1);
+    color: #616161;
+  }
+}
+
+/* Color swatches */
+.color {
+  white-space: nowrap;
+
+  &::before {
+    background-color: var(--color);
+    border: 1px solid rgba(128, 128, 128, 0.3);
+    border-radius: 2px;
+    content: ' ';
+    display: inline-block;
+    height: 1em;
+    margin-bottom: 0.15em;
+    margin-right: 0.1em;
+    vertical-align: middle;
+    width: 1em;
+  }
+}
