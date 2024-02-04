@@ -135,7 +135,7 @@ export const Tiptap = ({
     },
     editorProps: {
       attributes: {
-        class: '!min-h-[30rem]'
+        class: '!min-h-[50vh]'
       }
     }
   });
@@ -144,13 +144,13 @@ export const Tiptap = ({
     <>
       <div className='blog-title'>
         <div>Title</div>
-        <div className='textEditor min-w-[50rem] !min-h-[50px]'>
+        <div className='textEditor'>
           <Input value={title} onChange={e => setTitle(e.target.value)} />
         </div>
       </div>
       <div className='blog-body'>
         <div>Blog Body</div>
-        <div className='textEditor min-w-[40vw] min-h-[15rem]'>
+        <div className='textEditor min-w-[50vw]'>
           <MenuBar editor={editor} />
           <EditorContent editor={editor} />
         </div>

@@ -5,6 +5,7 @@ export { DropDown } from './DropDown';
 export { ContactUs } from './ContactUs';
 export { Icons } from './icons';
 export { Layout } from './Layout';
+export { Editor } from './Editor';
 
 // ShadCDN Components
 export { Input } from './ui/input';

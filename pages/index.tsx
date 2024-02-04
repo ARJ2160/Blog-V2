@@ -25,10 +25,8 @@ export const getServerSideProps: GetServerSideProps = async () => {
 const Home: NextPage = ({
   blogs
 }: InferGetServerSidePropsType<typeof getServerSideProps>): JSX.Element => {
-  const blogDate = moment().format('D MMM YYYY');
-
   useEffect(() => {
-    console.log('>> blogs', blogs);
+    console.log('>> blogs', blogs[0]);
   }, [blogs]);
   return (
     <React.Fragment>
@@ -43,30 +41,33 @@ const Home: NextPage = ({
         <div className='blogs m-10 grid md:grid-cols-2 grid-cols-1'>
           <div className='main-blog col-span-1'>
             {blogs[0] ? (
-              blogs.slice(0, 1).map((b: any, i: number) => {
+              blogs.slice(0, 1).map((blog: any, i: number) => {
                 return (
                   <div className='first-blog md:my-0 my-10' key={i}>
                     <div className='blog-image'>
                       <Link
-                        href={`/blog/${b?._id}`}
+                        href={`/blog/${blog?._id}`}
                         target='_blank'
                         rel='noopener noreferrer'
                       >
                         <Image
                           className='w-11/12 h-3/4 object-center aspect-ratio'
-                          src={b.postImage}
-                          width={b?.width || 100}
-                          height={b?.height || 100}
+                          src={blog.postImage}
+                          width={blog?.width || 100}
+                          height={blog?.height || 100}
                           loading='lazy'
                           alt='No image available'
                         />
                       </Link>
                     </div>
                     <div className='blog-content'>
-                      <p className='pt-4'>{blogDate}</p>
-                      <div className='text-5xl py-4'>{b?.title}</div>
+                      <div className='text-5xl py-2'>{blog?.title}</div>
+                      <p className='text-gray-500'>by {blog.author}</p>
+                      <p className='pb-4 text-gray-500'>
+                        {moment(blog?.postDate).format('MMM Do YYYY')}
+                      </p>
                       <div className='w-11/12'>
-                        {b.postBody?.replace(/<\/?[^>]+(>|$)/g, ' ')}
+                        {blog.postBody?.replace(/<\/?[^>]+(>|$)/g, ' ')}
                       </div>
                     </div>
                   </div>
