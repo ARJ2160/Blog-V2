@@ -8,6 +8,7 @@ import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import moment from 'moment';
 import { Editor } from '../../components';
+import client from '../../services/client';
 
 const Create = (): JSX.Element => {
   const router = useRouter();
@@ -28,16 +29,8 @@ const Create = (): JSX.Element => {
       postDate: moment().format('D MMM YYYY'),
       postImage
     };
-    await fetch((process.env.NEXT_PUBLIC_BACKEND_URL + 'postsdata') as string, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'POST'
-      },
-      body: JSON.stringify(blog)
-    }).then(res => {
-      if (res.ok) {
+    await client.post('/postsdata', blog).then(res => {
+      if (res.status === 200) {
         setTimeout(() => {
           setLoading(false);
           router.push('/');

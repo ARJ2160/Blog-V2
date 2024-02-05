@@ -3,7 +3,7 @@ import type {
   InferGetServerSidePropsType,
   NextPage
 } from 'next';
-import React, { useEffect } from 'react';
+import React from 'react';
 import Blog from './Blog';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -13,7 +13,7 @@ import { ContactUs } from '../components';
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const res = await fetch(
-    (process.env.NEXT_PUBLIC_BACKEND_URL + 'postsdata/') as string
+    (process.env.NEXT_PUBLIC_BACKEND_URL + '/postsdata/') as string
   ).then(res => res.json());
   return {
     props: {
@@ -25,9 +25,6 @@ export const getServerSideProps: GetServerSideProps = async () => {
 const Home: NextPage = ({
   blogs
 }: InferGetServerSidePropsType<typeof getServerSideProps>): JSX.Element => {
-  useEffect(() => {
-    console.log('>> blogs', blogs[0]);
-  }, [blogs]);
   return (
     <React.Fragment>
       <div className='bg-[#121212] text-white flex min-h-screen flex-col items-center justify-center'>

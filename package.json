@@ -5,6 +5,7 @@
     "build": "next build",
     "start": "next start",
     "prepare": "husky install",
+    "clean": "npx rimraf ./node_modules",
     "lint:fix": "eslint --fix .",
     "check-types": "tsc --pretty --noEmit",
     "format": "prettier --write .",
@@ -45,7 +46,6 @@
     "sharp": "^0.32.6",
     "tailwind-merge": "^1.14.0",
     "tailwindcss-animate": "^1.0.7",
-    "tinymce": "^6.8.2",
     "uuid": "^9.0.1"
   },
   "devDependencies": {

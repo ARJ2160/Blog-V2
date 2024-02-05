@@ -7,11 +7,12 @@ import { useRouter } from 'next/router';
 import { Icons } from '../../components/icons';
 import Image from 'next/image';
 import Head from 'next/head';
+import client from '../../services/client';
 
 export const getServerSideProps = async (context: any) => {
   const _id = context.params?._id;
   const res = await fetch(
-    (process.env.NEXT_PUBLIC_BACKEND_URL + 'postsdata/' + _id) as string
+    (process.env.NEXT_PUBLIC_BACKEND_URL + '/postsdata/' + _id) as string
   ).then(res => res.json());
   return {
     props: {
@@ -36,16 +37,13 @@ const BlogDetails = ({ blogDetails }: any) => {
     setImageSrc(blogDetails?.postImage);
     setId(blogDetails?._id);
     setPostBody(() => blogDetails?.postBody?.replace(/<\/?[^>]+(>|$)/g, ' '));
-    console.log('>>', blogDetails);
   }, []);
 
   const deleteBlog = async (e: any) => {
     e.preventDefault();
     setLoading(true);
-    await fetch(
-      (process.env.NEXT_PUBLIC_BACKEND_URL + 'postsdata/' + _id) as string,
-      { method: 'DELETE' }
-    )
+    await client
+      .delete(('/postsdata/' + _id) as string)
       .then(() => {
         setTimeout(() => {
           setLoading(false);

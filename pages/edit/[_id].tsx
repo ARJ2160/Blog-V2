@@ -6,11 +6,12 @@ import { SessionTypes } from '../../lib/types';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { Button, Icons, Tiptap } from '../../components';
+import client from '../../services/client';
 
 export const getServerSideProps = async (context: any) => {
   const _id = context.params?._id;
   const res = await fetch(
-    (process.env.NEXT_PUBLIC_BACKEND_URL + 'postsdata/' + _id) as string
+    (process.env.NEXT_PUBLIC_BACKEND_URL + '/postsdata/' + _id) as string
   ).then(res => res.json());
   return {
     props: {
@@ -21,7 +22,6 @@ export const getServerSideProps = async (context: any) => {
 
 const EditPost = ({ blogDetails }: any): JSX.Element => {
   const router = useRouter();
-  console.log('>>', blogDetails);
   const { data: session }: SessionTypes = useSession();
   const [description, setDescription] = useState(blogDetails.postBody);
   const [postTitle, setPostTitle] = useState<string>(blogDetails.title);
@@ -31,30 +31,24 @@ const EditPost = ({ blogDetails }: any): JSX.Element => {
     e.preventDefault();
     setLoading(true);
     const blog = {
-      title: blogDetails.title,
+      title: postTitle,
       author: session?.user?.name,
       postBody: description
     };
-    await fetch(
-      (process.env.NEXT_PUBLIC_BACKEND_URL +
-        `postsdata/update/${blogDetails._id}`) as string,
-      {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Methods': 'PUT'
-        },
-        body: JSON.stringify(blog)
-      }
-    ).then(res => {
-      if (res.ok) {
-        setLoading(false);
-        setTimeout(() => {
-          router.push('/');
-        }, 1500);
-      }
-    });
+    await client
+      .put(
+        (process.env.NEXT_PUBLIC_BACKEND_URL +
+          `/postsdata/update/${blogDetails._id}`) as string,
+        blog
+      )
+      .then(res => {
+        if (res.status === 200) {
+          setLoading(false);
+          setTimeout(() => {
+            router.push('/');
+          }, 1500);
+        }
+      });
   };
 
   return (
