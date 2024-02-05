@@ -36,11 +36,7 @@ const EditPost = ({ blogDetails }: any): JSX.Element => {
       postBody: description
     };
     await client
-      .put(
-        (process.env.NEXT_PUBLIC_BACKEND_URL +
-          `/postsdata/update/${blogDetails._id}`) as string,
-        blog
-      )
+      .put('/postsdata/update/${blogDetails._id}' as string, blog)
       .then(res => {
         if (res.status === 200) {
           setLoading(false);
