@@ -143,13 +143,13 @@ export const Tiptap = ({
   return (
     <>
       <div className='blog-title'>
-        <div>Title</div>
+        <div className='mb-2'>Title</div>
         <div className='textEditor'>
           <Input value={title} onChange={e => setTitle(e.target.value)} />
         </div>
       </div>
-      <div className='blog-body'>
-        <div>Blog Body</div>
+      <div className='blog-body mt-2'>
+        <div className='mb-2'>Blog Body</div>
         <div className='textEditor min-w-[50vw]'>
           <MenuBar editor={editor} />
           <EditorContent editor={editor} />

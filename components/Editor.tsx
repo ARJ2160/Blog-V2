@@ -21,7 +21,7 @@ export const Editor = ({
     }
   };
   return (
-    <div className='h-screen grid grid-cols-2 mt-18 gap-6 m-10'>
+    <div className='h-screen grid grid-cols-2 mt-18 gap-20 m-10'>
       <div className='col-span-1 flex flex-col justify-center'>
         <Tiptap
           title={postTitle}
