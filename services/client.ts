@@ -5,7 +5,7 @@ const client = axios.create({
   headers: {
     ContentType: 'application/json',
     AccessControlAllowOrigin: '*',
-    AccessControlAllowMethods: 'POST',
+    AccessControlAllowMethods: ['POST', 'PUT'],
     Accept: 'application/json'
   }
 });
