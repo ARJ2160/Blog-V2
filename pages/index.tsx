@@ -10,6 +10,8 @@ import Link from 'next/link';
 import moment from 'moment';
 import { CircularProgress, Stack } from '@mui/material';
 import { ContactUs } from '../components';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const res = await fetch(
@@ -27,6 +29,7 @@ const Home: NextPage = ({
 }: InferGetServerSidePropsType<typeof getServerSideProps>): JSX.Element => {
   return (
     <React.Fragment>
+      <ToastContainer autoClose={8000} />
       <div className='bg-[#121212] text-white flex min-h-screen flex-col items-center justify-center'>
         <div className='w-11/12 h-[2px] mb-10 mt-24 bg-gray-700'></div>
         <div className='flex flex-col items-center my-20 w-full'>
@@ -96,9 +99,9 @@ const Home: NextPage = ({
             )}
           </div>
         </div>
-      </div>
-      <div className=''>
-        <ContactUs />
+        <div className=''>
+          <ContactUs />
+        </div>
       </div>
     </React.Fragment>
   );

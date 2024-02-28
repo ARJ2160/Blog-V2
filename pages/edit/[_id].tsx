@@ -35,16 +35,12 @@ const EditPost = ({ blogDetails }: any): JSX.Element => {
       author: session?.user?.name,
       postBody: description
     };
-    await client
-      .put(`/postsdata/update/${blogDetails._id}` as string, blog)
-      .then(res => {
-        if (res.status === 200) {
-          setLoading(false);
-          setTimeout(() => {
-            router.push('/');
-          }, 1500);
-        }
-      });
+    await client.put(`/postsdata/update/${blogDetails._id}`, blog).then(res => {
+      if (res.status === 200) {
+        setLoading(false);
+        router.push('/');
+      }
+    });
   };
 
   return (

@@ -43,7 +43,7 @@ const BlogDetails = ({ blogDetails }: any) => {
     e.preventDefault();
     setLoading(true);
     await client
-      .delete(('/postsdata/' + _id) as string)
+      .delete('/postsdata/' + _id)
       .then(() => {
         setTimeout(() => {
           setLoading(false);

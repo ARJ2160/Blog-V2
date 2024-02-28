@@ -5,33 +5,44 @@ import { FaGoogle } from 'react-icons/fa';
 import { useState } from 'react';
 import { signIn } from 'next-auth/react';
 import { Button, Icons, Input, Label } from '../components';
+import client from '../services/client';
+import { useRouter } from 'next/router';
+import { ToastContainer, toast } from 'react-toastify';
+import { toastifyConfig } from '../lib/constants';
+import 'react-toastify/dist/ReactToastify.css';
 
 const SignIn = (): JSX.Element => {
+  const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleOAuthSignIn = (type: string) => {
     signIn(type, { callbackUrl: '/' });
   };
-  const handleSignIn = () => {
+  const handleSignIn = async () => {
     const signInParams = { email, password };
-    if (!email || !password) return window.alert('Please fill all the fields');
-    fetch((process.env.NEXT_PUBLIC_BACKEND_URL + '/users/signin') as string, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(signInParams),
-      mode: 'no-cors'
-    }).then(res => {
-      if (res.status === 200) {
-        // redirect("/")
-        // history.push('/');
-      } else if (res.status === 422) {
-        window.alert('Wrong Password');
-      }
-    });
+    if (!email || !password) {
+      console.log('>> HERE', email, password);
+      toast.error('Please fill all the fields', toastifyConfig);
+      return;
+    }
+    await client
+      .post('/users/signin', signInParams)
+      .then(res => {
+        if (res.status === 200) {
+          router.push('/');
+        }
+      })
+      .catch(err => {
+        console.log('>>', err);
+        if (err.response.status === 404) {
+          toast(err.response.data.error);
+        }
+      });
   };
   return (
     <div className='flex justify-center'>
+      <ToastContainer />
       <Card className='w-1/2 mt-40'>
         <CardHeader className='space-y-1'>
           <p className='text-2xl'>
