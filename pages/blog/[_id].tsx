@@ -26,16 +26,17 @@ const BlogDetails = ({ blogDetails }: any) => {
   const [author, setAuthor] = useState<string>(blogDetails?.author);
   const [title, setTitle] = useState<string>(blogDetails?.title);
   const [postBody, setPostBody] = useState(blogDetails?.postBody);
+  const [postDate, setPostDate] = useState(blogDetails?.postDate);
   const [imageSrc, setImageSrc] = useState(blogDetails?.postImage);
   const [_id, setId] = useState(blogDetails?._id);
   const [loading, setLoading] = useState<boolean>(false);
-  const blogDate = moment().format('D MMM YYYY');
 
   useEffect(() => {
     setAuthor(blogDetails?.author);
     setTitle(blogDetails?.title);
     setImageSrc(blogDetails?.postImage);
     setId(blogDetails?._id);
+    setPostDate(() => moment(blogDetails?.postDate).format('D MMM YYYY'));
     setPostBody(() => blogDetails?.postBody?.replace(/<\/?[^>]+(>|$)/g, ' '));
   }, []);
 
@@ -81,7 +82,7 @@ const BlogDetails = ({ blogDetails }: any) => {
                 </a>
                 <p className='text-5xl text-bold'>{title}</p>
                 <p className='text-sm py-4'>
-                  By {author}, Published on {blogDate}
+                  By {author}, Published on {postDate}
                 </p>
                 <div className='pb-3'>
                   <p>{postBody}</p>

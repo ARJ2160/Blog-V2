@@ -123,6 +123,7 @@
 
 .ProseMirror ul,
 .ProseMirror ol {
+  list-style: initial !important;
   padding: 0 2rem;
 }
 

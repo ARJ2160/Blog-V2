@@ -19,7 +19,6 @@ export const Editor = ({
     if (image) {
       setPostImages(image);
     }
-    setPostImageFile(postImageFile);
   };
   return (
     <div className='h-screen grid grid-cols-2 mt-18 gap-20 m-10'>
@@ -52,6 +51,7 @@ export const Editor = ({
           value={postImageFile}
           onChange={file => {
             handleImageChange(file);
+            setPostImageFile(file);
           }}
           dropzoneOptions={{
             maxSize: 5000000
