@@ -5,7 +5,7 @@ import React from 'react';
 import { SessionTypes } from '../../lib/types';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
-import { Button, Icons, Tiptap } from '../../components/index';
+import { Editor } from '../../components/index';
 import client from '../../services/client';
 
 export const getServerSideProps = async (context: any) => {
@@ -25,15 +25,19 @@ const EditPost = ({ blogDetails }: any): JSX.Element => {
   const { data: session }: SessionTypes = useSession();
   const [description, setDescription] = useState(blogDetails.postBody);
   const [postTitle, setPostTitle] = useState<string>(blogDetails.title);
+  const [postImage, setPostImages] = useState<string>(blogDetails.postImage);
   const [loading, setLoading] = useState<boolean>(false);
 
-  const handleSubmit = async (e: any) => {
+  const [file, setFile] = useState<File | undefined>();
+
+  const handlePostSubmit = async (e: any) => {
     e.preventDefault();
     setLoading(true);
     const blog = {
       title: postTitle,
       author: session?.user?.name,
-      postBody: description
+      postBody: description,
+      postImage
     };
     await client.put(`/postsdata/update/${blogDetails._id}`, blog).then(res => {
       if (res.status === 200) {
@@ -44,27 +48,18 @@ const EditPost = ({ blogDetails }: any): JSX.Element => {
   };
 
   return (
-    <div className='mt-40 mx-24 flex flex-col justify-center items'>
-      <Tiptap
-        title={postTitle}
-        setTitle={setPostTitle}
-        description={description}
-        setDescription={setDescription}
-      />
-      <Button
-        className='h-16 bg-black text-white hover:bg-black '
-        variant='secondary'
-        onClick={handleSubmit}
-      >
-        {loading ? (
-          <div className='animate-spin'>
-            <Icons.loading />
-          </div>
-        ) : (
-          'PUBLISH'
-        )}
-      </Button>
-    </div>
+    <Editor
+      postImage={postImage}
+      postImageFile={file}
+      setPostImageFile={setFile}
+      setPostImages={setPostImages}
+      postTitle={postTitle}
+      setPostTitle={setPostTitle}
+      description={description}
+      setDescription={setDescription}
+      loading={loading}
+      handlePostSubmit={handlePostSubmit}
+    />
   );
 };
 

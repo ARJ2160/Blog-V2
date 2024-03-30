@@ -4,6 +4,7 @@ import { handleImageUpload } from '../lib/utils';
 import { Tiptap, Button, Icons, SingleImageDropzone } from './index';
 
 export const Editor = ({
+  postImage,
   postImageFile,
   setPostImages,
   setPostImageFile,
@@ -16,12 +17,10 @@ export const Editor = ({
 }: EditorProps) => {
   const handleImageChange = async (file: File | undefined) => {
     const image = await handleImageUpload(file);
-    if (image) {
-      setPostImages(image);
-    }
+    setPostImages(image);
   };
   return (
-    <div className='h-screen grid grid-cols-2 mt-18 gap-20 m-10'>
+    <div className='h-screen grid grid-cols-2 mt-18 gap-20 m-10 mb-0'>
       <div className='col-span-1 flex flex-col justify-center'>
         <Tiptap
           title={postTitle}
@@ -48,7 +47,7 @@ export const Editor = ({
         <SingleImageDropzone
           width={600}
           height={350}
-          value={postImageFile}
+          value={postImageFile || postImage}
           onChange={file => {
             handleImageChange(file);
             setPostImageFile(file);

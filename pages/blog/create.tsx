@@ -43,6 +43,7 @@ const Create = (): JSX.Element => {
 
   return (
     <Editor
+      postImage={postImage}
       postImageFile={file}
       setPostImageFile={setFile}
       setPostImages={setPostImages}
