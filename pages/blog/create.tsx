@@ -18,6 +18,8 @@ const Create = (): JSX.Element => {
   const [postImage, setPostImages] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
 
+  const [file, setFile] = useState<File | undefined>();
+
   const handlePostSubmit = async (e: any) => {
     e.preventDefault();
     setLoading(true);
@@ -41,7 +43,8 @@ const Create = (): JSX.Element => {
 
   return (
     <Editor
-      postImage={postImage}
+      postImageFile={file}
+      setPostImageFile={setFile}
       setPostImages={setPostImages}
       postTitle={postTitle}
       setPostTitle={setPostTitle}

@@ -6,6 +6,7 @@ export { ContactUs } from './ContactUs';
 export { Icons } from './icons';
 export { Layout } from './Layout';
 export { Editor } from './Editor';
+export { SingleImageDropzone } from './SingleImageDropzone';
 
 // ShadCDN Components
 export { Input } from './ui/input';

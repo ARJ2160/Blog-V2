@@ -150,7 +150,7 @@ export const Tiptap = ({
       </div>
       <div className='blog-body mt-2'>
         <div className='mb-2'>Blog Body</div>
-        <div className='textEditor min-w-[50vw]'>
+        <div className='textEditor '>
           <MenuBar editor={editor} />
           <EditorContent editor={editor} />
         </div>

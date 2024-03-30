@@ -1,12 +1,12 @@
 import React from 'react';
 import { EditorProps } from '../lib/types';
-import Image from 'next/image';
 import { handleImageUpload } from '../lib/utils';
-import { Input, Tiptap, Button, Icons } from './index';
+import { Tiptap, Button, Icons, SingleImageDropzone } from './index';
 
 export const Editor = ({
-  postImage,
+  postImageFile,
   setPostImages,
+  setPostImageFile,
   postTitle,
   setPostTitle,
   description,
@@ -14,11 +14,12 @@ export const Editor = ({
   loading,
   handlePostSubmit
 }: EditorProps) => {
-  const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const image = await handleImageUpload(e);
+  const handleImageChange = async (file: File | undefined) => {
+    const image = await handleImageUpload(file);
     if (image) {
       setPostImages(image);
     }
+    setPostImageFile(postImageFile);
   };
   return (
     <div className='h-screen grid grid-cols-2 mt-18 gap-20 m-10'>
@@ -45,19 +46,16 @@ export const Editor = ({
       </div>
       <div className='blog-image-upload col-span-1 ml-10 flex flex-col justify-center'>
         <div>Upload an Image for your Blog</div>
-        {postImage && (
-          <Image
-            className=''
-            width={500}
-            height={500}
-            src={postImage || ''}
-            alt={'Cant render Image'}
-          />
-        )}
-        <Input
-          type={'file'}
-          onChange={handleImageChange}
-          accept={'.jpeg, .png, .jpg'}
+        <SingleImageDropzone
+          width={600}
+          height={350}
+          value={postImageFile}
+          onChange={file => {
+            handleImageChange(file);
+          }}
+          dropzoneOptions={{
+            maxSize: 5000000
+          }}
         />
       </div>
     </div>
