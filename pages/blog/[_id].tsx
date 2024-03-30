@@ -8,6 +8,8 @@ import { Icons } from '../../components/icons';
 import Image from 'next/image';
 import Head from 'next/head';
 import client from '../../services/client';
+import { SessionTypes } from '../../lib/types';
+import { useSession } from 'next-auth/react';
 
 export const getServerSideProps = async (context: any) => {
   const _id = context.params?._id;
@@ -22,6 +24,8 @@ export const getServerSideProps = async (context: any) => {
 };
 
 const BlogDetails = ({ blogDetails }: any) => {
+  const { data: session, status }: SessionTypes = useSession();
+
   const router = useRouter();
   const [author, setAuthor] = useState<string>(blogDetails?.author);
   const [title, setTitle] = useState<string>(blogDetails?.title);
@@ -90,28 +94,30 @@ const BlogDetails = ({ blogDetails }: any) => {
               </div>
             </article>
           </section>
-          <aside className='w-full md:w-1/3 flex flex-col items-center px-3'>
-            <div className='w-full bg-white shadow flex flex-col my-4 p-6'>
-              <Button
-                onClick={editBlog}
-                className='w-full bg-blue-600 hover:bg-blue-600 text-white font-bold text-sm uppercase rounded flex items-center justify-center px-2 py-3 mt-4'
-              >
-                Edit Blog
-              </Button>
-              <Button
-                onClick={deleteBlog}
-                className='w-full bg-red-600 hover:bg-red-600 text-white font-bold text-sm uppercase rounded flex items-center justify-center px-2 py-3 mt-4'
-              >
-                {loading ? (
-                  <div className='animate-spin'>
-                    <Icons.loading />
-                  </div>
-                ) : (
-                  'Delete Blog'
-                )}
-              </Button>
-            </div>
-          </aside>
+          {session?.user?.name === author && (
+            <aside className='w-full md:w-1/3 flex flex-col items-center px-3'>
+              <div className='w-full bg-white shadow flex flex-col my-4 p-6'>
+                <Button
+                  onClick={editBlog}
+                  className='w-full bg-blue-600 hover:bg-blue-600 text-white font-bold text-sm uppercase rounded flex items-center justify-center px-2 py-3 mt-4'
+                >
+                  Edit Blog
+                </Button>
+                <Button
+                  onClick={deleteBlog}
+                  className='w-full bg-red-600 hover:bg-red-600 text-white font-bold text-sm uppercase rounded flex items-center justify-center px-2 py-3 mt-4'
+                >
+                  {loading ? (
+                    <div className='animate-spin'>
+                      <Icons.loading />
+                    </div>
+                  ) : (
+                    'Delete Blog'
+                  )}
+                </Button>
+              </div>
+            </aside>
+          )}
         </div>
       </div>
     </>
