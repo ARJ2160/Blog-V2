@@ -4,10 +4,10 @@ import { FaGoogle } from 'react-icons/fa';
 import { useState } from 'react';
 import { signIn } from 'next-auth/react';
 import {
-  Button,
   Card,
   CardContent,
   CardHeader,
+  Button,
   Icons,
   Input,
   Label
@@ -18,7 +18,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { toastifyConfig } from '../lib/constants';
 import 'react-toastify/dist/ReactToastify.css';
 
-const SignIn = (): JSX.Element => {
+const SignUp = (): JSX.Element => {
   const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -26,7 +26,7 @@ const SignIn = (): JSX.Element => {
   const handleOAuthSignIn = (type: string) => {
     signIn(type, { callbackUrl: '/' });
   };
-  const handleSignIn = async () => {
+  const handleSignUp = async () => {
     const signInParams = { email, password };
     if (!email || !password) {
       console.log('>> HERE', email, password);
@@ -41,7 +41,6 @@ const SignIn = (): JSX.Element => {
         }
       })
       .catch(err => {
-        console.log('>>', err);
         if (err.response.status === 404) {
           toast(err.response.data.error);
         }
@@ -108,7 +107,7 @@ const SignIn = (): JSX.Element => {
           <Button
             variant='secondary'
             className='w-full bg-black text-white hover:text-black'
-            onClick={handleSignIn}
+            onClick={handleSignUp}
           >
             Sign In
           </Button>
@@ -118,4 +117,4 @@ const SignIn = (): JSX.Element => {
   );
 };
 
-export default SignIn;
+export default SignUp;

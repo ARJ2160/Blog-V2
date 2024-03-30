@@ -5,7 +5,7 @@ import React from 'react';
 import { SessionTypes } from '../../lib/types';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
-import { Button, Icons, Tiptap } from '../../components';
+import { Button, Icons, Tiptap } from '../../components/index';
 import client from '../../services/client';
 
 export const getServerSideProps = async (context: any) => {

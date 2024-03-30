@@ -30,7 +30,7 @@ export const Editor = ({
           setDescription={setDescription}
         />
         <Button
-          className='h-16 bg-black text-white mt-10 hover:bg-black '
+          className='w-full h-16 bg-black text-white mt-10 hover:bg-black '
           variant='secondary'
           onClick={handlePostSubmit}
         >

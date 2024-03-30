@@ -7,7 +7,7 @@ import { SessionTypes } from '../../lib/types';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import moment from 'moment';
-import { Editor } from '../../components';
+import { Editor } from '../../components/index';
 import client from '../../services/client';
 
 const Create = (): JSX.Element => {

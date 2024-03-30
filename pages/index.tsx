@@ -9,7 +9,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import moment from 'moment';
 import { CircularProgress, Stack } from '@mui/material';
-import { ContactUs } from '../components';
+import { ContactUs } from '../components/index';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 
@@ -99,9 +99,9 @@ const Home: NextPage = ({
             )}
           </div>
         </div>
-        <div className=''>
-          <ContactUs />
-        </div>
+      </div>
+      <div className=''>
+        <ContactUs />
       </div>
     </React.Fragment>
   );
