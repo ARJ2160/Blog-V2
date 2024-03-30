@@ -9,7 +9,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import moment from 'moment';
 import { CircularProgress, Stack } from '@mui/material';
-import { ContactUs } from '../components/index';
+import { ContactUs, Footer } from '../components/index';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 
@@ -53,8 +53,8 @@ const Home: NextPage = ({
                         <Image
                           className='w-11/12 h-3/4 object-center aspect-ratio'
                           src={blog.postImage}
-                          width={100}
-                          height={100}
+                          width={'700'}
+                          height={'400'}
                           loading='lazy'
                           alt='No image available'
                         />
@@ -74,14 +74,14 @@ const Home: NextPage = ({
                 );
               })
             ) : (
-              <div>
+              <React.Fragment>
                 <CircularProgress />
-              </div>
+              </React.Fragment>
             )}
           </div>
           <div className='secondary-blogs col-span-1'>
             {blogs?.length > 0 ? (
-              <div className=''>
+              <React.Fragment>
                 {blogs.slice(1, blogs.length).map((b: any, index: number) => {
                   return (
                     <div key={index}>
@@ -91,18 +91,17 @@ const Home: NextPage = ({
                     </div>
                   );
                 })}
-              </div>
+              </React.Fragment>
             ) : (
-              <div>
+              <React.Fragment>
                 <CircularProgress />
-              </div>
+              </React.Fragment>
             )}
           </div>
         </div>
       </div>
-      <div className=''>
-        <ContactUs />
-      </div>
+      <ContactUs />
+      <Footer />
     </React.Fragment>
   );
 };

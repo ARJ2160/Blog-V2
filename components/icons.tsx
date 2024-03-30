@@ -24,7 +24,9 @@ import {
   User,
   X,
   Loader,
-  type Icon as LucideIcon
+  type Icon as LucideIcon,
+  Facebook,
+  Linkedin
 } from 'lucide-react';
 
 export type Icon = LucideIcon;
@@ -88,5 +90,7 @@ export const Icons = {
   ),
   loading: Loader,
   twitter: Twitter,
+  facebook: Facebook,
+  linkedin: Linkedin,
   check: Check
 };

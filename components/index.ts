@@ -7,6 +7,7 @@ export { Icons } from './icons';
 export { Layout } from './Layout';
 export { Editor } from './Editor';
 export { SingleImageDropzone } from './SingleImageDropzone';
+export { Footer } from './Footer';
 
 // ShadCDN Components
 export { Input } from './ui/input';
