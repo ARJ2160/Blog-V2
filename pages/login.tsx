@@ -7,6 +7,7 @@ import {
   Button,
   Card,
   CardContent,
+  CardFooter,
   CardHeader,
   Icons,
   Input,
@@ -104,7 +105,7 @@ const SignIn = (): JSX.Element => {
             />
           </div>
         </CardContent>
-        <div>
+        <CardFooter>
           <Button
             variant='secondary'
             className='w-full bg-black text-white hover:text-black'
@@ -112,7 +113,7 @@ const SignIn = (): JSX.Element => {
           >
             Sign In
           </Button>
-        </div>
+        </CardFooter>
       </Card>
     </div>
   );

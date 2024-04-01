@@ -20,7 +20,7 @@ export interface TipTapProps {
 export interface EditorProps {
   postImage: string;
   postImageFile: File | undefined;
-  setPostImages: (postImage: string) => void;
+  setPostImage: (postImage: string) => void;
   setPostImageFile: (postImageFile: File | undefined) => void;
   postTitle: string;
   setPostTitle: (title: string) => void;

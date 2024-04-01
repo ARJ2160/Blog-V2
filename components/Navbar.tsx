@@ -21,8 +21,8 @@ export const NavBar = ({ toggle }: NavbarProps) => {
           <Image
             className='rounded-full'
             src={session.user.image as string}
-            width={'50'}
-            height={'50'}
+            width={50}
+            height={50}
             alt='user image'
           />
         )}
@@ -32,9 +32,14 @@ export const NavBar = ({ toggle }: NavbarProps) => {
       </div>
       <div className='pr-8 hidden md:flex items-center'>
         {status !== 'authenticated' && (
-          <Link href='/login' className='mx-5 cursor-pointer'>
-            Sign In
-          </Link>
+          <>
+            <Link href='/signup' className='mx-5 cursor-pointer'>
+              Sign Up
+            </Link>
+            <Link href='/login' className='mx-5 cursor-pointer'>
+              Sign In
+            </Link>
+          </>
         )}
         {status === 'authenticated' && (
           <div className='flex items-center'>
@@ -55,8 +60,8 @@ export const NavBar = ({ toggle }: NavbarProps) => {
               <Image
                 className='rounded-full'
                 src={session.user.image as string}
-                width={'50'}
-                height={'50'}
+                width={50}
+                height={50}
                 alt='user image'
               />
             )}

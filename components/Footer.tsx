@@ -9,8 +9,8 @@ export const Footer = () => {
         <div className='center-flex !justify-start'>
           <img
             src={WebsiteLogo.src}
-            width={WebsiteLogo.width}
-            height={WebsiteLogo.height}
+            width={200}
+            height={200}
             alt='Website Logo'
           />
         </div>

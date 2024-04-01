@@ -6,7 +6,7 @@ import { Tiptap, Button, Icons, SingleImageDropzone } from './index';
 export const Editor = ({
   postImage,
   postImageFile,
-  setPostImages,
+  setPostImage,
   setPostImageFile,
   postTitle,
   setPostTitle,
@@ -17,7 +17,7 @@ export const Editor = ({
 }: EditorProps) => {
   const handleImageChange = async (file: File | undefined) => {
     const image = await handleImageUpload(file);
-    setPostImages(image);
+    setPostImage(image);
   };
   return (
     <div className='h-screen grid grid-cols-2 mt-18 gap-20 m-10 mb-0'>

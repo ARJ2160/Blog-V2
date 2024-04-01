@@ -25,7 +25,7 @@ const EditPost = ({ blogDetails }: any): JSX.Element => {
   const { data: session }: SessionTypes = useSession();
   const [description, setDescription] = useState(blogDetails.postBody);
   const [postTitle, setPostTitle] = useState<string>(blogDetails.title);
-  const [postImage, setPostImages] = useState<string>(blogDetails.postImage);
+  const [postImage, setPostImage] = useState<string>(blogDetails.postImage);
   const [loading, setLoading] = useState<boolean>(false);
 
   const [file, setFile] = useState<File | undefined>();
@@ -52,7 +52,7 @@ const EditPost = ({ blogDetails }: any): JSX.Element => {
       postImage={postImage}
       postImageFile={file}
       setPostImageFile={setFile}
-      setPostImages={setPostImages}
+      setPostImage={setPostImage}
       postTitle={postTitle}
       setPostTitle={setPostTitle}
       description={description}

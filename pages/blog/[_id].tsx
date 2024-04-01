@@ -24,7 +24,7 @@ export const getServerSideProps = async (context: any) => {
 };
 
 const BlogDetails = ({ blogDetails }: any) => {
-  const { data: session, status }: SessionTypes = useSession();
+  const { data: session }: SessionTypes = useSession();
 
   const router = useRouter();
   const [author, setAuthor] = useState<string>(blogDetails?.author);

@@ -53,8 +53,8 @@ const Home: NextPage = ({
                         <Image
                           className='w-11/12 h-3/4 object-center aspect-ratio'
                           src={blog.postImage}
-                          width={'700'}
-                          height={'400'}
+                          width={700}
+                          height={400}
                           loading='lazy'
                           alt='No image available'
                         />

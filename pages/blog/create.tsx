@@ -15,7 +15,7 @@ const Create = (): JSX.Element => {
   const { data: session }: SessionTypes = useSession();
   const [description, setDescription] = useState<string>('');
   const [postTitle, setPostTitle] = useState<string>('');
-  const [postImage, setPostImages] = useState<string>('');
+  const [postImage, setPostImage] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
 
   const [file, setFile] = useState<File | undefined>();
@@ -46,7 +46,7 @@ const Create = (): JSX.Element => {
       postImage={postImage}
       postImageFile={file}
       setPostImageFile={setFile}
-      setPostImages={setPostImages}
+      setPostImage={setPostImage}
       postTitle={postTitle}
       setPostTitle={setPostTitle}
       description={description}
