@@ -34,10 +34,7 @@ export const editBlog = async (
     postBody,
     postImage
   };
-  await client.put(`/postsdata/update/${id}`, payload).then(resp => {
-    console.log('>>', resp);
-    return resp;
-  });
+  await client.put(`/postsdata/update/${id}`, payload);
 };
 
 export const deleteBlog = async (id: string) => {

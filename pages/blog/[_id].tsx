@@ -10,7 +10,7 @@ import Head from 'next/head';
 import { SessionTypes } from '../../lib/types';
 import { useSession } from 'next-auth/react';
 import { deleteBlog } from '../../services/blog';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 export const getServerSideProps = async (context: any) => {
   const _id = context.params?._id;
@@ -34,7 +34,8 @@ const BlogDetails = ({ blogDetails }: any) => {
   const [postDate, setPostDate] = useState(blogDetails?.postDate);
   const [imageSrc, setImageSrc] = useState(blogDetails?.postImage);
   const [_id, setId] = useState(blogDetails?._id);
-  const [loading, setLoading] = useState<boolean>(false);
+  const [isEditLoading, setIsEditLoading] = useState<boolean>(false);
+  const [isDeleteLoading, setIsDeleteLoading] = useState<boolean>(false);
 
   useEffect(() => {
     setAuthor(blogDetails?.author);
@@ -47,25 +48,25 @@ const BlogDetails = ({ blogDetails }: any) => {
 
   const handleDeleteBlog = async (e: any) => {
     e.preventDefault();
-    setLoading(true);
+    setIsDeleteLoading(true);
     deleteBlog(_id)
       .then(() => {
         setTimeout(() => {
-          setLoading(false);
+          setIsDeleteLoading(false);
           toast.success('Blog Deleted Successfully!');
           router.push('/');
         }, 1500);
       })
-      .catch(err => console.log(err));
+      .catch(err => toast.error(err));
   };
 
   const editBlog = () => {
+    setIsEditLoading(true);
     router.push('/edit/' + _id);
   };
 
   return (
     <>
-      <ToastContainer autoClose={8000} />
       <Head>
         <title>{title}</title>
       </Head>
@@ -103,13 +104,19 @@ const BlogDetails = ({ blogDetails }: any) => {
                   onClick={editBlog}
                   className='w-full bg-blue-600 hover:bg-blue-600 text-white font-bold text-sm uppercase rounded flex items-center justify-center px-2 py-3 mt-4'
                 >
-                  Edit Blog
+                  {isEditLoading ? (
+                    <div className='animate-spin'>
+                      <Icons.loading />
+                    </div>
+                  ) : (
+                    'Edit Blog'
+                  )}
                 </Button>
                 <Button
                   onClick={handleDeleteBlog}
                   className='w-full bg-red-600 hover:bg-red-600 text-white font-bold text-sm uppercase rounded flex items-center justify-center px-2 py-3 mt-4'
                 >
-                  {loading ? (
+                  {isDeleteLoading ? (
                     <div className='animate-spin'>
                       <Icons.loading />
                     </div>

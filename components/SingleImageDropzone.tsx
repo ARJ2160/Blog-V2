@@ -73,7 +73,6 @@ const SingleImageDropzone = React.forwardRef<HTMLInputElement, InputProps>(
       multiple: false,
       disabled,
       onDrop: acceptedFiles => {
-        console.log('>>', acceptedFiles[0].size);
         const file = acceptedFiles[0];
         if (file) {
           void onChange?.(file);

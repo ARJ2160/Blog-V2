@@ -1,0 +1,5 @@
+export const events = {
+  BLOG_POSTED: 'BLOG_POSTED',
+  BLOG_EDITED: 'BLOG_EDITED',
+  BLOG_DELETED: 'BLOG_DELETED'
+};

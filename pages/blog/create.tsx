@@ -33,7 +33,7 @@ const Create = (): JSX.Element => {
     ).then(() => {
       setTimeout(() => {
         setLoading(false);
-        toast.success('BLOG EDITED');
+        toast.success('BLOG CREATED');
         router.push('/');
       }, 1000);
     });
