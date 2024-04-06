@@ -7,9 +7,10 @@ import { useRouter } from 'next/router';
 import { Icons } from '../../components/icons';
 import Image from 'next/image';
 import Head from 'next/head';
-import client from '../../services/client';
 import { SessionTypes } from '../../lib/types';
 import { useSession } from 'next-auth/react';
+import { deleteBlog } from '../../services/blog';
+import { ToastContainer, toast } from 'react-toastify';
 
 export const getServerSideProps = async (context: any) => {
   const _id = context.params?._id;
@@ -44,14 +45,14 @@ const BlogDetails = ({ blogDetails }: any) => {
     setPostBody(() => blogDetails?.postBody?.replace(/<\/?[^>]+(>|$)/g, ' '));
   }, []);
 
-  const deleteBlog = async (e: any) => {
+  const handleDeleteBlog = async (e: any) => {
     e.preventDefault();
     setLoading(true);
-    await client
-      .delete('/postsdata/' + _id)
+    deleteBlog(_id)
       .then(() => {
         setTimeout(() => {
           setLoading(false);
+          toast.success('Blog Deleted Successfully!');
           router.push('/');
         }, 1500);
       })
@@ -64,6 +65,7 @@ const BlogDetails = ({ blogDetails }: any) => {
 
   return (
     <>
+      <ToastContainer autoClose={8000} />
       <Head>
         <title>{title}</title>
       </Head>
@@ -104,7 +106,7 @@ const BlogDetails = ({ blogDetails }: any) => {
                   Edit Blog
                 </Button>
                 <Button
-                  onClick={deleteBlog}
+                  onClick={handleDeleteBlog}
                   className='w-full bg-red-600 hover:bg-red-600 text-white font-bold text-sm uppercase rounded flex items-center justify-center px-2 py-3 mt-4'
                 >
                   {loading ? (

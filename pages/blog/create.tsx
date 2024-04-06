@@ -1,14 +1,14 @@
 'use client';
 
 import { useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 import React from 'react';
 import { SessionTypes } from '../../lib/types';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import moment from 'moment';
 import { Editor } from '../../components/index';
-import client from '../../services/client';
+import { postBlog } from '../../services/blog';
+import { toast } from 'react-toastify';
 
 const Create = (): JSX.Element => {
   const router = useRouter();
@@ -23,21 +23,19 @@ const Create = (): JSX.Element => {
   const handlePostSubmit = async (e: any) => {
     e.preventDefault();
     setLoading(true);
-    const blog = {
-      _id: uuidv4(),
-      author: session?.user?.name,
-      title: postTitle,
-      postBody: description,
-      postDate: moment().format('D MMM YYYY'),
+    const author = session?.user?.name || '';
+    postBlog(
+      author,
+      postTitle,
+      description,
+      moment().format('D MMM YYYY'),
       postImage
-    };
-    await client.post('/postsdata', blog).then(res => {
-      if (res.status === 200) {
-        setTimeout(() => {
-          setLoading(false);
-          router.push('/');
-        }, 1500);
-      }
+    ).then(() => {
+      setTimeout(() => {
+        setLoading(false);
+        toast.success('BLOG EDITED');
+        router.push('/');
+      }, 1000);
     });
   };
 

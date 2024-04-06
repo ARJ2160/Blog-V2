@@ -6,7 +6,9 @@ import { SessionTypes } from '../../lib/types';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { Editor } from '../../components/index';
-import client from '../../services/client';
+import { editBlog } from '../../services/blog';
+import { toast } from 'react-toastify';
+import Head from 'next/head';
 
 export const getServerSideProps = async (context: any) => {
   const _id = context.params?._id;
@@ -33,33 +35,35 @@ const EditPost = ({ blogDetails }: any): JSX.Element => {
   const handlePostSubmit = async (e: any) => {
     e.preventDefault();
     setLoading(true);
-    const blog = {
-      title: postTitle,
-      author: session?.user?.name,
-      postBody: description,
-      postImage
-    };
-    await client.put(`/postsdata/update/${blogDetails._id}`, blog).then(res => {
-      if (res.status === 200) {
+
+    const author = session?.user?.name || '';
+    editBlog(blogDetails._id, postTitle, author, description, postImage).then(
+      () => {
         setLoading(false);
+        toast.success('BLOG EDITED');
         router.push('/');
       }
-    });
+    );
   };
 
   return (
-    <Editor
-      postImage={postImage}
-      postImageFile={file}
-      setPostImageFile={setFile}
-      setPostImage={setPostImage}
-      postTitle={postTitle}
-      setPostTitle={setPostTitle}
-      description={description}
-      setDescription={setDescription}
-      loading={loading}
-      handlePostSubmit={handlePostSubmit}
-    />
+    <>
+      <Head>
+        <title>{blogDetails.title}</title>
+      </Head>
+      <Editor
+        postImage={postImage}
+        postImageFile={file}
+        setPostImageFile={setFile}
+        setPostImage={setPostImage}
+        postTitle={postTitle}
+        setPostTitle={setPostTitle}
+        description={description}
+        setDescription={setDescription}
+        loading={loading}
+        handlePostSubmit={handlePostSubmit}
+      />
+    </>
   );
 };
 
