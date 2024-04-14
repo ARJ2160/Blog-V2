@@ -29,8 +29,8 @@ const SignIn = (): JSX.Element => {
   const { signInUser } = UserStore(selector, shallow);
 
   const router = useRouter();
-  const [email, setEmail] = useState('atharvaj2160@gmail.com');
-  const [password, setPassword] = useState('ABCD');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const handleOAuthSignIn = (type: string) => {
     signIn(type, { callbackUrl: '/' });
