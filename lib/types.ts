@@ -29,3 +29,17 @@ export interface EditorProps {
   loading: boolean;
   handlePostSubmit: (e: any) => Promise<void>;
 }
+
+export interface User {
+  firstName?: string;
+  lastName?: string;
+  email?: string;
+  isUserSignedIn?: boolean;
+}
+
+export interface UserState extends User {
+  initialUser: User | null;
+  getUserSignedInStatus: () => boolean;
+  signInUser: (payload: User) => void;
+  signOutUser: () => void;
+}

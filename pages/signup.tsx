@@ -19,8 +19,16 @@ import { ToastContainer, toast } from 'react-toastify';
 import { toastifyConfig } from '../lib/constants';
 import 'react-toastify/dist/ReactToastify.css';
 import { v4 as uuidv4 } from 'uuid';
+import { UserState } from '../lib/types';
+import UserStore from '../store/store';
+import { shallow } from 'zustand/shallow';
 
 const SignUp = (): JSX.Element => {
+  const selector = (state: UserState) => ({
+    signInUser: state.signInUser
+  });
+  const { signInUser } = UserStore(selector, shallow);
+
   const router = useRouter();
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -46,6 +54,12 @@ const SignUp = (): JSX.Element => {
       .post('/users/register', signUpParams)
       .then(res => {
         if (res.status === 200) {
+          signInUser({
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            isUserSignedIn: true
+          });
           router.push('/');
         }
       })

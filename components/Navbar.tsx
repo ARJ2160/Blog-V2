@@ -4,11 +4,29 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { signOut, useSession } from 'next-auth/react';
 import { Button } from './ui/button';
-import { NavbarProps, SessionTypes } from '../lib/types';
+import { NavbarProps, SessionTypes, UserState } from '../lib/types';
 import { Icons } from './icons';
+import { shallow } from 'zustand/shallow';
+import UserStore from '../store/store';
+import { useRouter } from 'next/router';
 
 export const NavBar = ({ toggle }: NavbarProps) => {
+  const router = useRouter();
+  const selector = (state: UserState) => ({
+    isUserSignedIn: state.isUserSignedIn,
+    initialUser: state.initialUser,
+    signOutUser: state.signOutUser
+  });
+  const { isUserSignedIn, signOutUser } = UserStore(selector, shallow);
+
+  const handleSignOut = () => {
+    signOut();
+    signOutUser();
+    router.push('/');
+  };
+
   const { data: session, status }: SessionTypes = useSession();
+
   return (
     <nav className='bg-black h-20 w-screen text-white flex justify-between items-center fixed top-0'>
       <div className='nav--logo flex justify-center items-center ml-10'>
@@ -31,7 +49,7 @@ export const NavBar = ({ toggle }: NavbarProps) => {
         </div>
       </div>
       <div className='pr-8 hidden md:flex items-center'>
-        {status !== 'authenticated' && (
+        {status !== 'authenticated' && !isUserSignedIn && (
           <>
             <Link href='/signup' className='mx-5 cursor-pointer'>
               Get Started
@@ -41,17 +59,14 @@ export const NavBar = ({ toggle }: NavbarProps) => {
             </Link>
           </>
         )}
-        {status === 'authenticated' && (
+        {(status === 'authenticated' || isUserSignedIn) && (
           <div className='flex items-center'>
             <Link href='/blog/create' className='mx-5 cursor-pointer'>
               Write a Blog
             </Link>
             <Button
               variant='secondary'
-              onClick={() => {
-                signOut();
-                fetch('/');
-              }}
+              onClick={handleSignOut}
               className='mx-5 cursor-pointer'
             >
               Sign Out
