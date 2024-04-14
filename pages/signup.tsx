@@ -10,40 +10,47 @@ import {
   Button,
   Icons,
   Input,
-  Label
+  Label,
+  CardFooter
 } from '../components/index';
 import client from '../services/client';
 import { useRouter } from 'next/router';
 import { ToastContainer, toast } from 'react-toastify';
 import { toastifyConfig } from '../lib/constants';
 import 'react-toastify/dist/ReactToastify.css';
+import { v4 as uuidv4 } from 'uuid';
 
 const SignUp = (): JSX.Element => {
   const router = useRouter();
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleOAuthSignIn = (type: string) => {
+  const handleOAuthSignUp = (type: string) => {
     signIn(type, { callbackUrl: '/' });
   };
   const handleSignUp = async () => {
-    const signInParams = { email, password };
     if (!email || !password) {
-      console.log('>> HERE', email, password);
       toast.error('Please fill all the fields', toastifyConfig);
       return;
     }
+    const signUpParams = {
+      _id: uuidv4(),
+      firstName,
+      lastName,
+      email,
+      password
+    };
     await client
-      .post('/users/signin', signInParams)
+      .post('/users/register', signUpParams)
       .then(res => {
         if (res.status === 200) {
           router.push('/');
         }
       })
       .catch(err => {
-        if (err.response.status === 404) {
-          toast(err.response.data.error);
-        }
+        toast.error(err.response.data.error);
       });
   };
   return (
@@ -51,23 +58,21 @@ const SignUp = (): JSX.Element => {
       <ToastContainer />
       <Card className='w-1/2 mt-40'>
         <CardHeader className='space-y-1'>
-          <p className='text-2xl'>
-            Welcome to the BLOG! Sign into your account
-          </p>
-          <div>Enter your email below to sign in or use the below services</div>
+          <p className='text-2xl'>Welcome to the BLOG! Sign up now!</p>
+          <div>Enter your email below to sign up or use the below services</div>
         </CardHeader>
         <CardContent className='grid gap-4'>
           <div className='grid grid-cols-2 gap-6'>
             <Button
               variant='outline'
-              onClick={() => handleOAuthSignIn('github')}
+              onClick={() => handleOAuthSignUp('github')}
             >
               <Icons.gitHub className='mr-2 h-4 w-4' />
               Github
             </Button>
             <Button
               variant='outline'
-              onClick={() => handleOAuthSignIn('google')}
+              onClick={() => handleOAuthSignUp('google')}
             >
               <FaGoogle className='mr-2 h-4 w-4' />
               Google
@@ -82,6 +87,24 @@ const SignUp = (): JSX.Element => {
                 Or continue with
               </span>
             </div>
+          </div>
+          <div className='grid gap-2'>
+            <Label htmlFor='email'>First Name</Label>
+            <Input
+              value={firstName}
+              id='firstName'
+              type='text'
+              onChange={e => setFirstName(e.target.value)}
+            />
+          </div>
+          <div className='grid gap-2'>
+            <Label htmlFor='email'>Last Name</Label>
+            <Input
+              value={lastName}
+              id='lastName'
+              type='text'
+              onChange={e => setLastName(e.target.value)}
+            />
           </div>
           <div className='grid gap-2'>
             <Label htmlFor='email'>Email</Label>
@@ -103,15 +126,24 @@ const SignUp = (): JSX.Element => {
             />
           </div>
         </CardContent>
-        <div>
+        <CardContent>
+          Already have an account?{' '}
+          <span
+            onClick={() => router.push('/login')}
+            className='text-green-500 font-bold cursor-pointer'
+          >
+            Sign in
+          </span>
+        </CardContent>
+        <CardFooter>
           <Button
             variant='secondary'
             className='w-full bg-black text-white hover:text-black'
             onClick={handleSignUp}
           >
-            Sign In
+            Sign Up
           </Button>
-        </div>
+        </CardFooter>
       </Card>
     </div>
   );

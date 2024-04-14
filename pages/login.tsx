@@ -43,9 +43,7 @@ const SignIn = (): JSX.Element => {
       })
       .catch(err => {
         console.log('>>', err);
-        if (err.response.status === 404) {
-          toast(err.response.data.error);
-        }
+        toast.error(err.response.data.error);
       });
   };
   return (
@@ -104,6 +102,15 @@ const SignIn = (): JSX.Element => {
               onChange={e => setPassword(e.target.value)}
             />
           </div>
+        </CardContent>
+        <CardContent>
+          No Account?{' '}
+          <span
+            onClick={() => router.push('/signup')}
+            className='text-green-500 font-bold cursor-pointer'
+          >
+            Create one
+          </span>
         </CardContent>
         <CardFooter>
           <Button

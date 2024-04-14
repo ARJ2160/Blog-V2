@@ -34,7 +34,7 @@ export const NavBar = ({ toggle }: NavbarProps) => {
         {status !== 'authenticated' && (
           <>
             <Link href='/signup' className='mx-5 cursor-pointer'>
-              Sign Up
+              Get Started
             </Link>
             <Link href='/login' className='mx-5 cursor-pointer'>
               Sign In
