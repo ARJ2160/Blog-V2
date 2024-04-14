@@ -18,11 +18,19 @@ import { useRouter } from 'next/router';
 import { ToastContainer, toast } from 'react-toastify';
 import { toastifyConfig } from '../lib/constants';
 import 'react-toastify/dist/ReactToastify.css';
+import { UserState } from '../lib/types';
+import UserStore from '../store/store';
+import { shallow } from 'zustand/shallow';
 
 const SignIn = (): JSX.Element => {
+  const selector = (state: UserState) => ({
+    signInUser: state.signInUser
+  });
+  const { signInUser } = UserStore(selector, shallow);
+
   const router = useRouter();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('atharvaj2160@gmail.com');
+  const [password, setPassword] = useState('ABCD');
 
   const handleOAuthSignIn = (type: string) => {
     signIn(type, { callbackUrl: '/' });
@@ -38,6 +46,12 @@ const SignIn = (): JSX.Element => {
       .post('/users/signin', signInParams)
       .then(res => {
         if (res.status === 200) {
+          signInUser({
+            firstName: res.data.userData.firstName,
+            lastName: res.data.userData.lastName,
+            email: res.data.userData.email,
+            isUserSignedIn: true
+          });
           router.push('/');
         }
       })
