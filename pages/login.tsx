@@ -13,7 +13,6 @@ import {
   Input,
   Label
 } from '../components/index';
-import client from '../services/client';
 import { useRouter } from 'next/router';
 import { ToastContainer, toast } from 'react-toastify';
 import { toastifyConfig } from '../lib/constants';
@@ -21,6 +20,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { UserState } from '../lib/types';
 import UserStore from '../store/store';
 import { shallow } from 'zustand/shallow';
+import { customSignIn } from '../services/user';
 
 const SignIn = (): JSX.Element => {
   const selector = (state: UserState) => ({
@@ -38,19 +38,17 @@ const SignIn = (): JSX.Element => {
   };
   const handleSignIn = async () => {
     setIsLoading(true);
-    const signInParams = { email, password };
     if (!email || !password) {
       toast.error('Please fill all the fields', toastifyConfig);
       return;
     }
-    await client
-      .post('/users/signin', signInParams)
+    await customSignIn(email, password)
       .then(res => {
         if (res.status === 200) {
           signInUser({
-            firstName: res.data.userData.firstName,
-            lastName: res.data.userData.lastName,
-            email: res.data.userData.email,
+            firstName: res.userData.firstName,
+            lastName: res.userData.lastName,
+            email: res.userData.email,
             isUserSignedIn: true
           });
           setIsLoading(false);

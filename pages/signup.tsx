@@ -13,15 +13,14 @@ import {
   Label,
   CardFooter
 } from '../components/index';
-import client from '../services/client';
 import { useRouter } from 'next/router';
 import { ToastContainer, toast } from 'react-toastify';
 import { toastifyConfig } from '../lib/constants';
 import 'react-toastify/dist/ReactToastify.css';
-import { v4 as uuidv4 } from 'uuid';
 import { UserState } from '../lib/types';
 import UserStore from '../store/store';
 import { shallow } from 'zustand/shallow';
+import { customRegister } from '../services/user';
 
 const SignUp = (): JSX.Element => {
   const selector = (state: UserState) => ({
@@ -41,19 +40,12 @@ const SignUp = (): JSX.Element => {
   };
   const handleSignUp = async () => {
     setIsLoading(true);
-    if (!email || !password) {
+    if (!firstName || !lastName || !email || !password) {
+      setIsLoading(false);
       toast.error('Please fill all the fields', toastifyConfig);
       return;
     }
-    const signUpParams = {
-      _id: uuidv4(),
-      firstName,
-      lastName,
-      email,
-      password
-    };
-    await client
-      .post('/users/register', signUpParams)
+    customRegister(firstName, lastName, email, password)
       .then(res => {
         if (res.status === 200) {
           signInUser({
