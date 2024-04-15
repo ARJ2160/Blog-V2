@@ -1,8 +1,4 @@
 import { EditorContent, useEditor } from '@tiptap/react';
-import Code from '@tiptap/extension-code';
-import Document from '@tiptap/extension-document';
-import Paragraph from '@tiptap/extension-paragraph';
-import Text from '@tiptap/extension-text';
 import Typography from '@tiptap/extension-typography';
 import StarterKit from '@tiptap/starter-kit';
 import Underline from '@tiptap/extension-underline';
@@ -119,10 +115,6 @@ export const Tiptap = ({
     extensions: [
       StarterKit,
       Underline,
-      Document,
-      Paragraph,
-      Text,
-      Code,
       Typography,
       ColorHighlighter,
       SmilieReplacer
@@ -144,9 +136,11 @@ export const Tiptap = ({
     <>
       <div className='blog-title'>
         <div className='mb-2'>Title</div>
-        <div className='textEditor'>
-          <Input value={title} onChange={e => setTitle(e.target.value)} />
-        </div>
+        <Input
+          value={title}
+          className='focus-visible:ring-0 focus-visible:ring-offset-0'
+          onChange={e => setTitle(e.target.value)}
+        />
       </div>
       <div className='blog-body mt-2'>
         <div className='mb-2'>Blog Body</div>

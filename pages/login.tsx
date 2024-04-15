@@ -31,14 +31,15 @@ const SignIn = (): JSX.Element => {
   const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleOAuthSignIn = (type: string) => {
     signIn(type, { callbackUrl: '/' });
   };
   const handleSignIn = async () => {
+    setIsLoading(true);
     const signInParams = { email, password };
     if (!email || !password) {
-      console.log('>> HERE', email, password);
       toast.error('Please fill all the fields', toastifyConfig);
       return;
     }
@@ -52,11 +53,12 @@ const SignIn = (): JSX.Element => {
             email: res.data.userData.email,
             isUserSignedIn: true
           });
+          setIsLoading(false);
           router.push('/');
         }
       })
       .catch(err => {
-        console.log('>>', err);
+        setIsLoading(false);
         toast.error(err.response.data.error);
       });
   };
@@ -132,7 +134,13 @@ const SignIn = (): JSX.Element => {
             className='w-full bg-black text-white hover:text-black'
             onClick={handleSignIn}
           >
-            Sign In
+            {isLoading ? (
+              <div className='animate-spin'>
+                <Icons.loading />
+              </div>
+            ) : (
+              'Sign In'
+            )}
           </Button>
         </CardFooter>
       </Card>

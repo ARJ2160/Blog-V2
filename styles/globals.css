@@ -177,6 +177,7 @@
   border: 1px solid grey;
 }
 .menuBar {
+  padding: 10px;
   padding-bottom: 5px;
   display: flex;
   align-items: center;
@@ -185,6 +186,7 @@
 .menuBar button {
   font-size: 18px;
   margin: 7px;
+  padding: 2px;
   margin-right: 15px;
   outline: none;
   border: none;
@@ -202,7 +204,6 @@
 
 button.is_active {
   background: rgb(197, 197, 197);
-  padding: 2px 3px;
   border-radius: 2px;
 }
 

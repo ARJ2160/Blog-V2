@@ -23,7 +23,7 @@ export const Editor = ({
   return (
     <>
       <ToastContainer autoClose={8000} />
-      <div className='h-screen grid grid-cols-2 mt-18 gap-20 m-10 mb-0'>
+      <div className='h-screen grid grid-cols-2 mt-18 gap-2 m-10 mb-0'>
         <div className='col-span-1 flex flex-col justify-center'>
           <Tiptap
             title={postTitle}
