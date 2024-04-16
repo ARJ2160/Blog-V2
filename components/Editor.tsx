@@ -1,6 +1,5 @@
 import React from 'react';
 import { EditorProps } from '../lib/types';
-import { handleImageUpload } from '../lib/utils';
 import { Tiptap, Button, Icons, SingleImageDropzone } from './index';
 import { ToastContainer } from 'react-toastify';
 
@@ -16,10 +15,6 @@ export const Editor = ({
   loading,
   handlePostSubmit
 }: EditorProps) => {
-  const handleImageChange = async (file: File | undefined) => {
-    const image = await handleImageUpload(file);
-    setPostImage(image);
-  };
   return (
     <>
       <ToastContainer autoClose={8000} />
@@ -52,7 +47,6 @@ export const Editor = ({
             height={350}
             value={postImageFile || postImage}
             onChange={file => {
-              handleImageChange(file);
               setPostImageFile(file);
             }}
             dropzoneOptions={{

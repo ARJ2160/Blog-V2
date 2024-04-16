@@ -37,13 +37,18 @@ const EditPost = ({ blogDetails }: any): JSX.Element => {
     setLoading(true);
 
     const author = session?.user?.name || '';
-    editBlog(blogDetails._id, postTitle, author, description, postImage).then(
-      () => {
-        setLoading(false);
-        toast.success('BLOG EDITED');
-        router.push('/');
-      }
-    );
+    editBlog(
+      blogDetails._id,
+      postTitle,
+      author,
+      description,
+      postImage,
+      file
+    ).then(() => {
+      setLoading(false);
+      toast.success('BLOG EDITED');
+      router.push('/');
+    });
   };
 
   return (

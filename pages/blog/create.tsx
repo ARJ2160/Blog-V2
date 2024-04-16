@@ -18,7 +18,7 @@ const Create = (): JSX.Element => {
   const [postImage, setPostImage] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
 
-  const [file, setFile] = useState<File | undefined>();
+  const [file, setFile] = useState<File>();
 
   const handlePostSubmit = async (e: any) => {
     e.preventDefault();
@@ -29,7 +29,7 @@ const Create = (): JSX.Element => {
       postTitle,
       description,
       moment().format('D MMM YYYY'),
-      postImage
+      file
     ).then(() => {
       setTimeout(() => {
         setLoading(false);

@@ -49,7 +49,7 @@ const BlogDetails = ({ blogDetails }: any) => {
   const handleDeleteBlog = async (e: any) => {
     e.preventDefault();
     setIsDeleteLoading(true);
-    deleteBlog(_id)
+    deleteBlog(_id, imageSrc)
       .then(() => {
         setTimeout(() => {
           setIsDeleteLoading(false);
