@@ -45,7 +45,9 @@ export const editBlog = async (
   let firebaseImageURL = '';
 
   if (postImageFile) {
-    await deleteImageFromFirebase(postImage, id);
+    if (postImage) {
+      await deleteImageFromFirebase(postImage, id);
+    }
     firebaseImageURL = await postImageOnFirebase(postImageFile, id);
   }
 
@@ -68,10 +70,9 @@ export const postImageOnFirebase = async (
   blogId: string
 ): Promise<string> => {
   const imageRef = ref(storage, `${file.name + '_' + blogId}`);
-  const imageURL = await uploadBytes(imageRef, file).then(data => {
-    return getDownloadURL(data.ref).then(val => {
-      return val;
-    });
+  const imageURL = await uploadBytes(imageRef, file).then(async data => {
+    const val = await getDownloadURL(data.ref);
+    return val;
   });
   return imageURL;
 };

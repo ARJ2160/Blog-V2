@@ -11,6 +11,7 @@ import { SessionTypes } from '../../lib/types';
 import { useSession } from 'next-auth/react';
 import { deleteBlog } from '../../services/blog';
 import { toast } from 'react-toastify';
+import { toastifyConfig } from '../../lib/constants';
 
 export const getServerSideProps = async (context: any) => {
   const _id = context.params?._id;
@@ -49,11 +50,11 @@ const BlogDetails = ({ blogDetails }: any) => {
   const handleDeleteBlog = async (e: any) => {
     e.preventDefault();
     setIsDeleteLoading(true);
-    deleteBlog(_id, imageSrc)
+    await deleteBlog(_id, imageSrc)
       .then(() => {
+        toast.success('Blog Deleted Successfully!', toastifyConfig);
         setTimeout(() => {
           setIsDeleteLoading(false);
-          toast.success('Blog Deleted Successfully!');
           router.push('/');
         }, 1500);
       })

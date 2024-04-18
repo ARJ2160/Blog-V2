@@ -9,6 +9,7 @@ import { Editor } from '../../components/index';
 import { editBlog } from '../../services/blog';
 import { toast } from 'react-toastify';
 import Head from 'next/head';
+import { toastifyConfig } from '../../lib/constants';
 
 export const getServerSideProps = async (context: any) => {
   const _id = context.params?._id;
@@ -30,14 +31,14 @@ const EditPost = ({ blogDetails }: any): JSX.Element => {
   const [postImage, setPostImage] = useState<string>(blogDetails.postImage);
   const [loading, setLoading] = useState<boolean>(false);
 
-  const [file, setFile] = useState<File | undefined>();
+  const [file, setFile] = useState<File>();
 
   const handlePostSubmit = async (e: any) => {
     e.preventDefault();
     setLoading(true);
 
     const author = session?.user?.name || '';
-    editBlog(
+    await editBlog(
       blogDetails._id,
       postTitle,
       author,
@@ -45,9 +46,11 @@ const EditPost = ({ blogDetails }: any): JSX.Element => {
       postImage,
       file
     ).then(() => {
-      setLoading(false);
-      toast.success('BLOG EDITED');
-      router.push('/');
+      toast.success('Blog Edited Successfully!', toastifyConfig);
+      setTimeout(() => {
+        setLoading(false);
+        router.push('/');
+      }, 1500);
     });
   };
 

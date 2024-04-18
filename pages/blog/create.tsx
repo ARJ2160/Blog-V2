@@ -9,6 +9,7 @@ import moment from 'moment';
 import { Editor } from '../../components/index';
 import { postBlog } from '../../services/blog';
 import { toast } from 'react-toastify';
+import { toastifyConfig } from '../../lib/constants';
 
 const Create = (): JSX.Element => {
   const router = useRouter();
@@ -21,21 +22,25 @@ const Create = (): JSX.Element => {
   const [file, setFile] = useState<File>();
 
   const handlePostSubmit = async (e: any) => {
+    if (!postTitle || !file || !description) {
+      toast.error('Please fill all details');
+      return;
+    }
     e.preventDefault();
     setLoading(true);
     const author = session?.user?.name || '';
-    postBlog(
+    await postBlog(
       author,
       postTitle,
       description,
       moment().format('D MMM YYYY'),
       file
     ).then(() => {
+      toast.success('BLOG CREATED', toastifyConfig);
       setTimeout(() => {
         setLoading(false);
-        toast.success('BLOG CREATED');
         router.push('/');
-      }, 1000);
+      }, 1500);
     });
   };
 

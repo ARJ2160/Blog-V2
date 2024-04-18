@@ -47,6 +47,9 @@ export const Editor = ({
             height={350}
             value={postImageFile || postImage}
             onChange={file => {
+              if (file === undefined) {
+                setPostImage('');
+              }
               setPostImageFile(file);
             }}
             dropzoneOptions={{
