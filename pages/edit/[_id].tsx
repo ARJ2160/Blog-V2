@@ -34,6 +34,10 @@ const EditPost = ({ blogDetails }: any): JSX.Element => {
   const [file, setFile] = useState<File>();
 
   const handlePostSubmit = async (e: any) => {
+    if (!postTitle || !file || !description) {
+      toast.error('Please fill all details');
+      return;
+    }
     e.preventDefault();
     setLoading(true);
 

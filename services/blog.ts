@@ -61,7 +61,9 @@ export const editBlog = async (
 };
 
 export const deleteBlog = async (id: string, image: string) => {
-  await deleteImageFromFirebase(image, id);
+  if (image) {
+    await deleteImageFromFirebase(image, id);
+  }
   await client.delete('/postsdata/' + id);
 };
 
