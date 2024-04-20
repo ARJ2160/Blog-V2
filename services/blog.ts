@@ -1,12 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 import client from './client';
-import { storage } from '../lib/firebase';
-import {
-  deleteObject,
-  getDownloadURL,
-  ref,
-  uploadBytes
-} from 'firebase/storage';
+import { deleteImageFromFirebase, postImageOnFirebase } from './firebase';
 
 export const postBlog = async (
   author: string,
@@ -67,19 +61,3 @@ export const deleteBlog = async (id: string, image: string) => {
   await client.delete('/postsdata/' + id);
 };
 
-export const postImageOnFirebase = async (
-  file: File,
-  blogId: string
-): Promise<string> => {
-  const imageRef = ref(storage, `${file.name + '_' + blogId}`);
-  const imageURL = await uploadBytes(imageRef, file).then(async data => {
-    const val = await getDownloadURL(data.ref);
-    return val;
-  });
-  return imageURL;
-};
-
-const deleteImageFromFirebase = async (image: string, id: string) => {
-  const imageRef = ref(storage, `${image + '_' + id}`);
-  await deleteObject(imageRef);
-};
