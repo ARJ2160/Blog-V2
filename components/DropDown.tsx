@@ -32,7 +32,6 @@ export const DropDown = ({ isOpen, toggle }: any) => {
               variant='ghost'
               onClick={() => {
                 signOut();
-                // redirect('/')
                 fetch('/');
               }}
               className='mx-5 cursor-pointer'

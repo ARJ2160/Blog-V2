@@ -60,4 +60,3 @@ export const deleteBlog = async (id: string, image: string) => {
   }
   await client.delete('/postsdata/' + id);
 };
-

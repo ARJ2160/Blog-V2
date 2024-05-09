@@ -2,9 +2,13 @@ import { EditorContent, useEditor } from '@tiptap/react';
 import Typography from '@tiptap/extension-typography';
 import StarterKit from '@tiptap/starter-kit';
 import Underline from '@tiptap/extension-underline';
-
+import ListItem from '@tiptap/extension-list-item';
+import OrderedList from '@tiptap/extension-ordered-list';
+import Heading from '@tiptap/extension-heading';
+import Code from '@tiptap/extension-code';
 import {
   FaBold,
+  FaCode,
   FaHeading,
   FaItalic,
   FaListOl,
@@ -19,17 +23,17 @@ import { SmilieReplacer } from '../lib/SimilieReplacer';
 import { ColorHighlighter } from '../lib/ColorHighlighter';
 import { TipTapProps } from '../lib/types';
 import { Input } from './ui/input';
+import { Editor } from '@tiptap/core';
 
-const MenuBar = ({ editor }: any) => {
-  if (!editor) {
-    return null;
-  }
+const MenuBar = ({ editor }: { editor: Editor | null }) => {
+  if (!editor) return null;
 
   return (
     <div className='menuBar'>
       <div>
         <button
           onClick={() => editor.chain().focus().toggleBold().run()}
+          disabled={!editor.can().chain().focus().toggleBold().run()}
           className={editor.isActive('bold') ? 'is_active' : ''}
         >
           <FaBold />
@@ -54,13 +58,23 @@ const MenuBar = ({ editor }: any) => {
         </button>
         <button
           onClick={() =>
+            editor.chain().focus().toggleHeading({ level: 1 }).run()
+          }
+          className={
+            editor.isActive('heading', { level: 1 }) ? 'is_active' : ''
+          }
+        >
+          <FaHeading className='heading1' />
+        </button>
+        <button
+          onClick={() =>
             editor.chain().focus().toggleHeading({ level: 2 }).run()
           }
           className={
             editor.isActive('heading', { level: 2 }) ? 'is_active' : ''
           }
         >
-          <FaHeading />
+          <FaHeading className='heading2' />
         </button>
         <button
           onClick={() =>
@@ -90,6 +104,12 @@ const MenuBar = ({ editor }: any) => {
         >
           <FaQuoteLeft />
         </button>
+        <button
+          onClick={() => editor.chain().focus().toggleCode().run()}
+          className={editor.isActive('code') ? 'is_active' : ''}
+        >
+          <FaCode />
+        </button>
       </div>
       <div>
         <button onClick={() => editor.chain().focus().undo().run()}>
@@ -109,21 +129,24 @@ export const Tiptap = ({
   description,
   setDescription
 }: TipTapProps) => {
-  const HTML_REGEX = /<\/?[^>]+(>|$)/g;
-
   const editor = useEditor({
     extensions: [
       StarterKit,
       Underline,
       Typography,
       ColorHighlighter,
-      SmilieReplacer
+      SmilieReplacer,
+      OrderedList,
+      ListItem,
+      Code,
+      Heading.configure({
+        levels: [1, 2, 3]
+      })
     ],
     content: description,
     onUpdate: ({ editor }) => {
       const html = editor.getHTML();
-      const removeHtmlTags = html.replace(HTML_REGEX, '');
-      setDescription(removeHtmlTags);
+      setDescription(html);
     },
     editorProps: {
       attributes: {

@@ -12,6 +12,7 @@ import { useSession } from 'next-auth/react';
 import { deleteBlog } from '../../services/blog';
 import { toast } from 'react-toastify';
 import { toastifyConfig } from '../../lib/constants';
+import parse from 'html-react-parser';
 
 export const getServerSideProps = async (context: any) => {
   const _id = context.params?._id;
@@ -44,7 +45,7 @@ const BlogDetails = ({ blogDetails }: any) => {
     setImageSrc(blogDetails?.postImage);
     setId(blogDetails?._id);
     setPostDate(() => moment(blogDetails?.postDate).format('D MMM YYYY'));
-    setPostBody(() => blogDetails?.postBody?.replace(/<\/?[^>]+(>|$)/g, ' '));
+    setPostBody(blogDetails?.postBody);
   }, []);
 
   const handleDeleteBlog = async (e: any) => {
@@ -92,9 +93,7 @@ const BlogDetails = ({ blogDetails }: any) => {
                 <p className='text-sm py-4'>
                   By {author}, Published on {postDate}
                 </p>
-                <div className='pb-3'>
-                  <p>{postBody}</p>
-                </div>
+                <div className='pb-3'>{parse(postBody)}</div>
               </div>
             </article>
           </section>

@@ -106,6 +106,13 @@
   }
 }
 
+ul {
+  list-style: initial;
+}
+ol {
+  list-style: decimal;
+}
+
 .ProseMirror {
   padding: 10px;
   border-top: 1px solid grey;
@@ -121,9 +128,13 @@
   margin-top: 0.75em;
 }
 
-.ProseMirror ul,
+.ProseMirror ul {
+  list-style: initial;
+  padding: 0 2rem;
+}
+
 .ProseMirror ol {
-  list-style: initial !important;
+  list-style: decimal;
   padding: 0 2rem;
 }
 
@@ -137,7 +148,7 @@
 }
 
 .ProseMirror code {
-  background-color: rgba(#616161, 0.1);
+  background-color: rgba(97, 97, 97, 0.1);
   color: #616161;
 }
 
@@ -150,8 +161,6 @@
 }
 .ProseMirror code {
   color: inherit;
-  padding: 0;
-  background: none;
   font-size: 0.8rem;
 }
 
@@ -171,6 +180,15 @@
   margin: 2rem 0;
 }
 
+code {
+  background-color: rgba(97, 97, 97, 0.1);
+  border-radius: 0.25em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  color: #616161;
+  font-size: 0.9rem;
+  padding: 0.25em;
+}
 /* ............................ */
 .textEditor {
   border-radius: 5px;
@@ -198,6 +216,14 @@
   margin-right: 7px;
 }
 
+.heading1 {
+  font-size: 25px;
+}
+
+.heading2 {
+  font-size: 20px;
+}
+
 .heading3 {
   font-size: 15px;
 }
@@ -211,11 +237,6 @@ button.is_active {
 .tiptap {
   > * + * {
     margin-top: 0.75em;
-  }
-
-  code {
-    background-color: rgba(#616161, 0.1);
-    color: #616161;
   }
 }
 
