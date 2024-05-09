@@ -72,62 +72,61 @@ const BlogDetails = ({ blogDetails }: any) => {
       <Head>
         <title>{title}</title>
       </Head>
-      <div key={_id}>
-        <div className='container mx-auto flex flex-wrap py-6 mt-24'>
-          <section className='w-full md:w-2/3 flex flex-col items-center'>
-            <article className='flex flex-col shadow my-4'>
-              <Image
-                width={'700'}
-                height={'400'}
-                src={imageSrc}
-                alt='Blog Image'
-              />
-              <div className='bg-white flex flex-col justify-start p-6'>
-                <a
-                  href='#'
-                  className='text-blue-700 text-sm font-bold uppercase pb-4'
-                >
-                  Technology
-                </a>
-                <p className='text-5xl text-bold'>{title}</p>
-                <p className='text-sm py-4'>
-                  By {author}, Published on {postDate}
-                </p>
-                <div className='pb-3'>{parse(postBody)}</div>
-              </div>
-            </article>
-          </section>
-          {session?.user?.name === author && (
-            <aside className='w-full md:w-1/3 flex flex-col items-center px-3'>
-              <div className='w-full bg-white shadow flex flex-col my-4 p-6'>
-                <Button
-                  onClick={editBlog}
-                  className='w-full bg-blue-600 hover:bg-blue-600 text-white font-bold text-sm uppercase rounded flex items-center justify-center px-2 py-3 mt-4'
-                >
-                  {isEditLoading ? (
-                    <div className='animate-spin'>
-                      <Icons.loading />
-                    </div>
-                  ) : (
-                    'Edit Blog'
-                  )}
-                </Button>
-                <Button
-                  onClick={handleDeleteBlog}
-                  className='w-full bg-red-600 hover:bg-red-600 text-white font-bold text-sm uppercase rounded flex items-center justify-center px-2 py-3 mt-4'
-                >
-                  {isDeleteLoading ? (
-                    <div className='animate-spin'>
-                      <Icons.loading />
-                    </div>
-                  ) : (
-                    'Delete Blog'
-                  )}
-                </Button>
-              </div>
-            </aside>
-          )}
-        </div>
+      <div className='container mx-auto flex flex-wrap py-6 mt-24' key={_id}>
+        <section className='w-full md:w-2/3 flex flex-col items-center'>
+          <article className='flex flex-col shadow mb-4 rounded-lg'>
+            <Image
+              height={1080}
+              width={1920}
+              className='rounded-lg'
+              src={imageSrc}
+              alt='Blog Image'
+            />
+            <div className='bg-white flex flex-col justify-start p-6'>
+              <a
+                href='#'
+                className='text-blue-700 text-sm font-bold uppercase pb-4'
+              >
+                Technology
+              </a>
+              <p className='text-5xl text-bold'>{title}</p>
+              <p className='text-sm py-4'>
+                By {author}, Published on {postDate}
+              </p>
+              <div className='pb-3'>{parse(postBody)}</div>
+            </div>
+          </article>
+        </section>
+        {session?.user?.name === author && (
+          <aside className='w-full md:w-1/3 flex flex-col items-center px-3'>
+            <div className='w-full bg-white shadow flex flex-col my-4 p-6 rounded-lg'>
+              <Button
+                onClick={editBlog}
+                className='w-full bg-blue-600 hover:bg-blue-600 text-white font-bold text-sm uppercase rounded flex items-center justify-center px-2 py-3 mt-4'
+              >
+                {isEditLoading ? (
+                  <div className='animate-spin'>
+                    <Icons.loading />
+                  </div>
+                ) : (
+                  'Edit Blog'
+                )}
+              </Button>
+              <Button
+                onClick={handleDeleteBlog}
+                className='w-full bg-red-600 hover:bg-red-600 text-white font-bold text-sm uppercase rounded flex items-center justify-center px-2 py-3 mt-4'
+              >
+                {isDeleteLoading ? (
+                  <div className='animate-spin'>
+                    <Icons.loading />
+                  </div>
+                ) : (
+                  'Delete Blog'
+                )}
+              </Button>
+            </div>
+          </aside>
+        )}
       </div>
     </>
   );

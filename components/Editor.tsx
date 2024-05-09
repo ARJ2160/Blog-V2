@@ -18,7 +18,7 @@ export const Editor = ({
   return (
     <>
       <ToastContainer autoClose={8000} />
-      <div className='h-screen grid grid-cols-2 mt-18 gap-2 m-10 mb-0'>
+      <div className='h-screen mt-32 grid grid-cols-2 mt-18 gap-2 m-10 mb-0'>
         <div className='col-span-1 flex flex-col justify-center'>
           <Tiptap
             title={postTitle}
@@ -27,7 +27,7 @@ export const Editor = ({
             setDescription={setDescription}
           />
           <Button
-            className='w-full h-16 bg-black text-white mt-10 hover:bg-black '
+            className='w-full h-16 bg-black text-white mt-10 hover:bg-black mb-10'
             variant='secondary'
             onClick={handlePostSubmit}
           >

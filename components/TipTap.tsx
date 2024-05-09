@@ -150,7 +150,7 @@ export const Tiptap = ({
     },
     editorProps: {
       attributes: {
-        class: '!min-h-[50vh]'
+        class: '!min-h-[512px] !max-h-screen overflow-y-auto'
       }
     }
   });

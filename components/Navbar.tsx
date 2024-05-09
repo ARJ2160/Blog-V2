@@ -28,7 +28,7 @@ export const NavBar = ({ toggle }: NavbarProps) => {
   const { data: session, status }: SessionTypes = useSession();
 
   return (
-    <nav className='bg-black h-20 w-screen text-white flex justify-between items-center fixed top-0'>
+    <nav className='bg-black h-20 w-screen text-white flex justify-between items-center fixed top-0 z-10'>
       <div className='nav--logo flex justify-center items-center ml-10'>
         <Link href='/' className='nav--logo-primary'>
           <Image src={Logo} alt='logo' width={120} height={120} />

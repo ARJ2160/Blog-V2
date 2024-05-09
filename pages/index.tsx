@@ -61,13 +61,15 @@ const Home: NextPage = ({
                       </Link>
                     </div>
                     <div className='blog-content'>
-                      <div className='text-5xl py-2'>{blog?.title}</div>
+                      <div className='text-4xl py-2'>{blog?.title}</div>
                       <p className='text-gray-500'>by {blog.author}</p>
                       <p className='pb-4 text-gray-500'>
                         {moment(blog?.postDate).format('MMM Do YYYY')}
                       </p>
                       <div className='w-11/12'>
-                        {blog.postBody?.replace(/<\/?[^>]+(>|$)/g, ' ')}
+                        {blog.postBody
+                          ?.replace(/<\/?[^>]+(>|$)/g, ' ')
+                          .slice(0, 250) + '...'}
                       </div>
                     </div>
                   </div>
