@@ -34,10 +34,15 @@ const EditPost = ({ blogDetails }: any): JSX.Element => {
   const [file, setFile] = useState<File>();
 
   const handlePostSubmit = async (e: any) => {
-    if (!postTitle || !file || !description) {
+    if (!postTitle || !description) {
       toast.error('Please fill all details');
       return;
     }
+    if (!postImage && !file) {
+      toast.error('Please add an image');
+      return;
+    }
+
     e.preventDefault();
     setLoading(true);
 

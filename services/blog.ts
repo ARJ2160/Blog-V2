@@ -49,7 +49,7 @@ export const editBlog = async (
     title,
     author,
     postBody,
-    postImage: firebaseImageURL
+    postImage: firebaseImageURL || postImage
   };
   await client.put(`/postsdata/update/${id}`, payload);
 };
